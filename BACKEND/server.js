@@ -10,8 +10,11 @@ const port = 3041
 
 
 app.get(`/questions`, async (req, res) => {
-    let questions = await Question.find({ category: 'html' }).limit(5)
-    res.send(questions)
+    let questions = await Question.aggregate([
+        { $match: { category: 'html' } },
+        { $sample: { size: 10 } }
+    ])
+    res.json(questions)
 })
 
 async function startServer() {

@@ -39,7 +39,7 @@ const Home = () => {
 
   let recentActivity = [
     {
-      name: 'HTML',
+      name: 'html',
       image: require('@/assets/categories/HTML.png'),
       totalQuestions: 30,
       attemptedQuestions: 20,
