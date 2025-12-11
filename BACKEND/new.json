@@ -1,0 +1,552 @@
+[
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What does JavaScript primarily run on?",
+        "correct_answer": "The browser",
+        "incorrect_answers": [
+            "The database",
+            "The operating system kernel",
+            "The router"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which HTML tag is commonly used to include JavaScript code?",
+        "correct_answer": "<script>",
+        "incorrect_answers": [
+            "<javascript>",
+            "<code>",
+            "<js>"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which of the following is a correct way to declare a variable in modern JavaScript?",
+        "correct_answer": "let x = 5;",
+        "incorrect_answers": [
+            "var: x = 5;",
+            "dim x = 5;",
+            "int x = 5;"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which keyword declares a constant in JavaScript?",
+        "correct_answer": "const",
+        "incorrect_answers": [
+            "let",
+            "static",
+            "define"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which keyword was traditionally used to declare variables before ES6?",
+        "correct_answer": "var",
+        "incorrect_answers": [
+            "let",
+            "const",
+            "static"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "How do you write a single-line comment in JavaScript?",
+        "correct_answer": "// comment",
+        "incorrect_answers": [
+            "# comment",
+            "<!-- comment -->",
+            "/* comment */"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "How do you write a multi-line comment in JavaScript?",
+        "correct_answer": "/* comment */",
+        "incorrect_answers": [
+            "// comment //",
+            "# comment #",
+            "<!-- comment -->"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which symbol is used for strict equality comparison in JavaScript?",
+        "correct_answer": "===",
+        "incorrect_answers": [
+            "==",
+            "=",
+            "!=="
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which operator is used to assign a value to a variable?",
+        "correct_answer": "=",
+        "incorrect_answers": [
+            "==",
+            "===",
+            ":="
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What is the output type of the typeof operator?",
+        "correct_answer": "A string",
+        "incorrect_answers": [
+            "A number",
+            "A boolean",
+            "An object"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which built-in method is used to print something to the browser console?",
+        "correct_answer": "console.log()",
+        "incorrect_answers": [
+            "print()",
+            "alertConsole()",
+            "log.console()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which of the following is a correct string in JavaScript?",
+        "correct_answer": "\"Hello\"",
+        "incorrect_answers": [
+            "Hello",
+            "String(Hello)",
+            "<Hello>"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Arrays in JavaScript are defined using:",
+        "correct_answer": "Square brackets []",
+        "incorrect_answers": [
+            "Curly braces {}",
+            "Angle brackets <>",
+            "Parentheses ()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "How do you create an empty array in JavaScript?",
+        "correct_answer": "let arr = [];",
+        "incorrect_answers": [
+            "let arr = {};",
+            "let arr = ();",
+            "let arr = null[];"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "How do you create an empty object in JavaScript?",
+        "correct_answer": "let obj = {};",
+        "incorrect_answers": [
+            "let obj = [];",
+            "let obj = ();",
+            "let obj = object();"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method adds a new element to the end of an array?",
+        "correct_answer": "push()",
+        "incorrect_answers": [
+            "pop()",
+            "shift()",
+            "unshift()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method removes the last element from an array?",
+        "correct_answer": "pop()",
+        "incorrect_answers": [
+            "push()",
+            "shift()",
+            "delete()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which operator is used for string concatenation in JavaScript?",
+        "correct_answer": "+",
+        "incorrect_answers": [
+            "&",
+            "++",
+            "."
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What will \"\" + 1 + 2 evaluate to in JavaScript?",
+        "correct_answer": "\"12\"",
+        "incorrect_answers": [
+            "\"3\"",
+            "3",
+            "NaN"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which keyword is used to define a function in JavaScript?",
+        "correct_answer": "function",
+        "incorrect_answers": [
+            "def",
+            "func",
+            "method"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which of the following is a function expression?",
+        "correct_answer": "const add = function(a, b) { return a + b; };",
+        "incorrect_answers": [
+            "function add(a, b) { return a + b; }",
+            "func add(a, b) => a + b;",
+            "add(a, b) = a + b;"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which of these is an arrow function?",
+        "correct_answer": "const sum = (a, b) => a + b;",
+        "incorrect_answers": [
+            "const sum(a, b) -> a + b;",
+            "sum = function a, b => a + b;",
+            "function => sum(a, b);"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What does NaN stand for in JavaScript?",
+        "correct_answer": "Not a Number",
+        "incorrect_answers": [
+            "No any Number",
+            "Non applicable Number",
+            "Null and None"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What is the result of 2 + \"2\" in JavaScript?",
+        "correct_answer": "\"22\"",
+        "incorrect_answers": [
+            "4",
+            "NaN",
+            "\"4\""
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What is the result of 2 == \"2\" in JavaScript?",
+        "correct_answer": "true",
+        "incorrect_answers": [
+            "false",
+            "NaN",
+            "undefined"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What is the result of 2 === \"2\" in JavaScript?",
+        "correct_answer": "false",
+        "incorrect_answers": [
+            "true",
+            "NaN",
+            "undefined"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which keyword is used to exit a loop early?",
+        "correct_answer": "break",
+        "incorrect_answers": [
+            "stop",
+            "exit",
+            "cancel"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which keyword skips to the next iteration of a loop?",
+        "correct_answer": "continue",
+        "incorrect_answers": [
+            "skip",
+            "next",
+            "pass"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which loop is guaranteed to run at least once?",
+        "correct_answer": "do...while",
+        "incorrect_answers": [
+            "for",
+            "while",
+            "forEach"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which built-in method converts a JSON string to an object?",
+        "correct_answer": "JSON.parse()",
+        "incorrect_answers": [
+            "JSON.stringify()",
+            "JSON.object()",
+            "JSON.toObject()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which built-in method converts an object to a JSON string?",
+        "correct_answer": "JSON.stringify()",
+        "incorrect_answers": [
+            "JSON.parse()",
+            "JSON.encode()",
+            "JSON.toString()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method rounds a number down to the nearest integer?",
+        "correct_answer": "Math.floor()",
+        "incorrect_answers": [
+            "Math.round()",
+            "Math.ceil()",
+            "Math.down()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method rounds a number up to the nearest integer?",
+        "correct_answer": "Math.ceil()",
+        "incorrect_answers": [
+            "Math.floor()",
+            "Math.roundUp()",
+            "Math.up()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method returns a random number between 0 (inclusive) and 1 (exclusive)?",
+        "correct_answer": "Math.random()",
+        "incorrect_answers": [
+            "Math.rand()",
+            "Math.randomNumber()",
+            "Math.range()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "How do you create a template literal in JavaScript?",
+        "correct_answer": "Using backticks ``",
+        "incorrect_answers": [
+            "Using single quotes ''",
+            "Using double quotes \"\"",
+            "Using angle brackets <>"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which built-in method joins array elements into a string?",
+        "correct_answer": "join()",
+        "incorrect_answers": [
+            "concat()",
+            "combine()",
+            "merge()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method is used to execute a function for each element in an array?",
+        "correct_answer": "forEach()",
+        "incorrect_answers": [
+            "each()",
+            "loop()",
+            "mapAll()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method creates a new array with the results of calling a function on every element?",
+        "correct_answer": "map()",
+        "incorrect_answers": [
+            "forEach()",
+            "filter()",
+            "reduce()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method creates a new array with elements that pass a test?",
+        "correct_answer": "filter()",
+        "incorrect_answers": [
+            "map()",
+            "reduce()",
+            "find()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method reduces an array to a single value?",
+        "correct_answer": "reduce()",
+        "incorrect_answers": [
+            "map()",
+            "filter()",
+            "slice()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which property gives the number of elements in an array?",
+        "correct_answer": "length",
+        "incorrect_answers": [
+            "size",
+            "count",
+            "items"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What is the global object in a browser JavaScript environment?",
+        "correct_answer": "window",
+        "incorrect_answers": [
+            "global",
+            "process",
+            "document"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which object represents the HTML document in the browser?",
+        "correct_answer": "document",
+        "incorrect_answers": [
+            "window",
+            "dom",
+            "html"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method selects an element by its id?",
+        "correct_answer": "document.getElementById()",
+        "incorrect_answers": [
+            "document.queryId()",
+            "document.getById()",
+            "document.selectId()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method can select the first element that matches a CSS selector?",
+        "correct_answer": "document.querySelector()",
+        "incorrect_answers": [
+            "document.query()",
+            "document.select()",
+            "document.getSelector()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which method shows an alert popup with a message?",
+        "correct_answer": "alert()",
+        "incorrect_answers": [
+            "popup()",
+            "message()",
+            "notify()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which built-in function pauses code execution and asks the user for input?",
+        "correct_answer": "prompt()",
+        "incorrect_answers": [
+            "alert()",
+            "confirm()",
+            "input()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which function shows a dialog with OK and Cancel buttons?",
+        "correct_answer": "confirm()",
+        "incorrect_answers": [
+            "alert()",
+            "prompt()",
+            "choice()"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "What does \"use strict\" do in JavaScript?",
+        "correct_answer": "Enables stricter parsing and error handling",
+        "incorrect_answers": [
+            "Makes the code run faster",
+            "Enables TypeScript",
+            "Disables all errors"
+        ]
+    },
+    {
+        "category": "javascript",
+        "difficulty": "easy",
+        "question": "Which statement is used to handle errors in JavaScript?",
+        "correct_answer": "try...catch",
+        "incorrect_answers": [
+            "do...catch",
+            "error...handle",
+            "catch...throw"
+        ]
+    }
+]
