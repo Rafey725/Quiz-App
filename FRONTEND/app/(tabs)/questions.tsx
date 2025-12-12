@@ -5,7 +5,7 @@ import QuizPage from '@/components/QuizPage'
 import ResultPage from '@/components/ResultPage'
 
 
-const QuestionPage = () => {
+const Questions = () => {
   type QuestionsType = {
     _id: string
     category: string
@@ -18,17 +18,18 @@ const QuestionPage = () => {
   const [renderedPage, setRenderedPage] = useState<string>('quiz-page')
   const [questions, setQuestions] = useState<QuestionsType[]>([])
   const [score, setScore] = useState<number>(0)
+  const [totalQuestions, setTotalQuestions] = useState<number>(0)
 
 
   return (
     <>
       {
         renderedPage === 'quiz-page'
-          ? <QuizPage changePage={setRenderedPage} questions={questions} setQuestions={setQuestions} score={score} setScore={setScore} />
-          : <ResultPage changePage={setRenderedPage} questions={questions} score={score} />
+          ? <QuizPage changePage={setRenderedPage} setTotalQuestions={setTotalQuestions} score={score} setScore={setScore} />
+          : <ResultPage changePage={setRenderedPage} totalQuestions={totalQuestions} score={score} />
       }
     </>
   )
 }
 
-export default QuestionPage
+export default Questions

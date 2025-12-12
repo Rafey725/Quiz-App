@@ -1,2125 +1,277 @@
 [
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "What does HTML stand for?",
-        "correct_answer": "HyperText Markup Language",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "What is the purpose of a destructor in C++?",
+        "correct_answer": "To release resources allocated by an object",
         "incorrect_answers": [
-            "Hyperlinks Text Marking Language",
-            "Home Tool Markup Language",
-            "Hyper Transfer Markup Language"
+            "To create objects",
+            "To overload operators",
+            "To allocate memory"
         ]
     },
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which HTML tag is used to display a heading?",
-        "correct_answer": "<h1>",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "Which keyword is used to inherit a class?",
+        "correct_answer": "public",
         "incorrect_answers": [
-            "<head>",
-            "<heading>",
-            "<header>"
+            "extends",
+            "inherits",
+            "implements"
         ]
     },
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which HTML tag is used for a paragraph?",
-        "correct_answer": "<p>",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "What does STL stand for?",
+        "correct_answer": "Standard Template Library",
         "incorrect_answers": [
-            "<para>",
-            "<text>",
-            "<paragraph>"
+            "System Type Library",
+            "Standard Tool Language",
+            "Static Template Logic"
         ]
     },
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to insert an image?",
-        "correct_answer": "<img>",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "Which container allows duplicate values?",
+        "correct_answer": "multiset",
         "incorrect_answers": [
-            "<image>",
-            "<pic>",
-            "<src>"
+            "set",
+            "map",
+            "unordered_set"
         ]
     },
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute is used to specify the image source?",
-        "correct_answer": "src",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "What is function overloading?",
+        "correct_answer": "Multiple functions with same name but different parameters",
         "incorrect_answers": [
-            "href",
-            "link",
-            "img"
+            "Multiple classes with same name",
+            "Overriding base class methods",
+            "Using templates"
         ]
     },
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "What is the correct tag for a line break?",
-        "correct_answer": "<br>",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "What is the use of the virtual keyword?",
+        "correct_answer": "To support runtime polymorphism",
         "incorrect_answers": [
-            "<lb>",
-            "<break>",
-            "<newline>"
+            "To allocate memory",
+            "To prevent inheritance",
+            "To hide methods"
         ]
     },
     {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "What does the <a> tag do?",
-        "correct_answer": "Creates a hyperlink",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "Which operator is used to access members via pointer?",
+        "correct_answer": "->",
         "incorrect_answers": [
-            "Creates an audio file",
-            "Adds an animation",
-            "Displays an alert"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute specifies a link URL?",
-        "correct_answer": "href",
-        "incorrect_answers": [
-            "src",
-            "link",
-            "url"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used for an unordered list?",
-        "correct_answer": "<ul>",
-        "incorrect_answers": [
-            "<ol>",
-            "<li>",
-            "<list>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used for a list item?",
-        "correct_answer": "<li>",
-        "incorrect_answers": [
-            "<list>",
-            "<item>",
-            "<point>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines a table?",
-        "correct_answer": "<table>",
-        "incorrect_answers": [
-            "<tab>",
-            "<tbl>",
-            "<t>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines a table row?",
-        "correct_answer": "<tr>",
-        "incorrect_answers": [
-            "<td>",
-            "<th>",
-            "<row>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines a table cell?",
-        "correct_answer": "<td>",
-        "incorrect_answers": [
-            "<tr>",
-            "<th>",
-            "<cell>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "HTML comments are written using:",
-        "correct_answer": "<!-- comment -->",
-        "incorrect_answers": [
-            " // comment",
-            "# comment",
-            "/* comment */"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to make text bold?",
-        "correct_answer": "<b>",
-        "incorrect_answers": [
-            "<bold>",
-            "<strong>",
-            "<bb>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which HTML tag is used to display a video?",
-        "correct_answer": "<video>",
-        "incorrect_answers": [
-            "<media>",
-            "<movie>",
-            "<vid>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "What does the <title> tag do?",
-        "correct_answer": "Sets the page title",
-        "incorrect_answers": [
-            "Creates a header",
-            "Displays main content",
-            "Sets a tooltip"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "The <body> tag contains:",
-        "correct_answer": "The visible page content",
-        "incorrect_answers": [
-            "Metadata",
-            "Scripts only",
-            "Browser settings"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used for the largest heading?",
-        "correct_answer": "<h1>",
-        "incorrect_answers": [
-            "<h6>",
-            "<head>",
-            "<title>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to insert a horizontal line?",
-        "correct_answer": "<hr>",
-        "incorrect_answers": [
-            "<line>",
-            "<hl>",
-            "<breakline>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines the HTML document root?",
-        "correct_answer": "<html>",
-        "incorrect_answers": [
-            "<root>",
-            "<doc>",
-            "<main>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used for bold and important text?",
-        "correct_answer": "<strong>",
-        "incorrect_answers": [
-            "<b>",
-            "<important>",
-            "<highlight>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which HTML element is used to play audio?",
-        "correct_answer": "<audio>",
-        "incorrect_answers": [
-            "<sound>",
-            "<music>",
-            "<mp3>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to define metadata?",
-        "correct_answer": "<meta>",
-        "incorrect_answers": [
-            "<info>",
-            "<head>",
-            "<data>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag creates a dropdown list?",
-        "correct_answer": "<select>",
-        "incorrect_answers": [
-            "<dropdown>",
-            "<choice>",
-            "<input>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag creates a form?",
-        "correct_answer": "<form>",
-        "incorrect_answers": [
-            "<input>",
-            "<submit>",
-            "<fieldset>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which input type creates a password field?",
-        "correct_answer": "password",
-        "incorrect_answers": [
-            "text",
-            "secure",
-            "hidden"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "What is the correct tag for creating a checkbox?",
-        "correct_answer": "<input type='checkbox'>",
-        "incorrect_answers": [
-            "<checkbox>",
-            "<input type='check'>",
-            "<box>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "HTML files are saved with which extension?",
-        "correct_answer": ".html",
-        "incorrect_answers": [
-            ".ht",
-            ".htx",
-            ".html5"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute provides alternative text for an image?",
-        "correct_answer": "alt",
-        "incorrect_answers": [
-            "title",
-            "name",
-            "desc"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to group block-level content?",
-        "correct_answer": "<div>",
-        "incorrect_answers": [
-            "<span>",
-            "<group>",
-            "<box>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to group inline content?",
-        "correct_answer": "<span>",
-        "incorrect_answers": [
-            "<div>",
-            "<inline>",
-            "<small>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute adds inline CSS?",
-        "correct_answer": "style",
-        "incorrect_answers": [
-            "css",
-            "class",
-            "design"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute opens a link in a new tab?",
-        "correct_answer": "target='_blank'",
-        "incorrect_answers": [
-            "newtab='true'",
-            "open='tab'",
-            "link='_blank'"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag embeds JavaScript?",
-        "correct_answer": "<script>",
-        "incorrect_answers": [
-            "<js>",
-            "<javascript>",
-            "<code>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines the main container of content?",
-        "correct_answer": "<main>",
-        "incorrect_answers": [
-            "<body>",
-            "<section>",
-            "<container>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to define navigation links?",
-        "correct_answer": "<nav>",
-        "incorrect_answers": [
-            "<links>",
-            "<menu>",
-            "<navigate>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to define a footer?",
-        "correct_answer": "<footer>",
-        "incorrect_answers": [
-            "<foot>",
-            "<bottom>",
-            "<end>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines a section in a document?",
-        "correct_answer": "<section>",
-        "incorrect_answers": [
-            "<div>",
-            "<part>",
-            "<article>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines an article?",
-        "correct_answer": "<article>",
-        "incorrect_answers": [
-            "<section>",
-            "<post>",
-            "<paper>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute sets the width of an image?",
-        "correct_answer": "width",
-        "incorrect_answers": [
-            "size",
-            "length",
-            "scale"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute sets the height of an image?",
-        "correct_answer": "height",
-        "incorrect_answers": [
-            "size",
-            "length",
-            "scale"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to define a label for a form input?",
-        "correct_answer": "<label>",
-        "incorrect_answers": [
-            "<tag>",
-            "<caption>",
-            "<title>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which HTML element is used to show preformatted text?",
-        "correct_answer": "<pre>",
-        "incorrect_answers": [
-            "<code>",
-            "<text>",
-            "<formatted>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which input type is used for selecting a date?",
-        "correct_answer": "date",
-        "incorrect_answers": [
-            "datetime",
-            "calendar",
-            "day"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which attribute disables an input field?",
-        "correct_answer": "disabled",
-        "incorrect_answers": [
-            "readonly",
-            "stop",
-            "hide"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag defines a clickable button?",
-        "correct_answer": "<button>",
-        "incorrect_answers": [
-            "<click>",
-            "<btn>",
-            "<press>"
-        ]
-    },
-    {
-        "category": "html",
-        "difficulty": "easy",
-        "question": "Which tag is used to display inline code?",
-        "correct_answer": "<code>",
-        "incorrect_answers": [
-            "<pre>",
-            "<kbd>",
-            "<cmd>"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "What does CSS stand for?",
-        "correct_answer": "Cascading Style Sheets",
-        "incorrect_answers": [
-            "Colorful Style Sheets",
-            "Computer Style Sheets",
-            "Creative Style System"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which HTML tag is used to link an external CSS file?",
-        "correct_answer": "<link>",
-        "incorrect_answers": [
-            "<style>",
-            "<css>",
-            "<script>"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which HTML attribute is used to add inline CSS?",
-        "correct_answer": "style",
-        "incorrect_answers": [
-            "css",
-            "class",
-            "design"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to change the text color?",
-        "correct_answer": "color",
-        "incorrect_answers": [
-            "font-color",
-            "text-color",
-            "foreground"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to change the background color?",
-        "correct_answer": "background-color",
-        "incorrect_answers": [
-            "color-background",
-            "bg",
-            "back-color"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you select all <p> elements in CSS?",
-        "correct_answer": "p {}",
-        "incorrect_answers": [
-            "#p {}",
-            ".p {}",
-            "<p> {}"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you select an element with the id 'main'?",
-        "correct_answer": "#main",
-        "incorrect_answers": [
-            ".main",
-            "main",
-            "*main"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you select all elements with the class 'item'?",
-        "correct_answer": ".item",
-        "incorrect_answers": [
-            "#item",
-            "item",
-            "*item"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to change the font size?",
-        "correct_answer": "font-size",
-        "incorrect_answers": [
-            "text-size",
-            "size",
-            "font-style"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to make text bold?",
-        "correct_answer": "font-weight",
-        "incorrect_answers": [
-            "font-bold",
-            "text-weight",
-            "bold"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property controls the size of the text?",
-        "correct_answer": "font-size",
-        "incorrect_answers": [
-            "font-style",
-            "text-align",
-            "font-family"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to underline text?",
-        "correct_answer": "text-decoration",
-        "incorrect_answers": [
-            "font-decoration",
-            "underline",
-            "text-style"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to align text to the center?",
-        "correct_answer": "text-align: center;",
-        "incorrect_answers": [
-            "align: center;",
-            "font-align: center;",
-            "center-text: true;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to change the font family?",
-        "correct_answer": "font-family",
-        "incorrect_answers": [
-            "text-font",
-            "font-style",
-            "font-type"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which CSS property is used to change the space between lines of text?",
-        "correct_answer": "line-height",
-        "incorrect_answers": [
-            "text-height",
-            "line-space",
-            "row-height"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property sets the space inside an element border?",
-        "correct_answer": "padding",
-        "incorrect_answers": [
-            "margin",
-            "spacing",
-            "border-spacing"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property sets the space outside an element border?",
-        "correct_answer": "margin",
-        "incorrect_answers": [
-            "padding",
-            "spacing",
-            "border-margin"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you make a list have no bullets?",
-        "correct_answer": "list-style: none;",
-        "incorrect_answers": [
-            "bullet: none;",
-            "text-style: none;",
-            "list-type: hidden;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to change the cursor when hovering?",
-        "correct_answer": "cursor",
-        "incorrect_answers": [
-            "mouse",
-            "pointer",
-            "hover"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to set a background image?",
-        "correct_answer": "background-image",
-        "incorrect_answers": [
-            "image",
-            "background-src",
-            "bg-image"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you make a background image repeat only horizontally?",
-        "correct_answer": "background-repeat: repeat-x;",
-        "incorrect_answers": [
-            "background-repeat: x;",
-            "background-repeat: horizontal;",
-            "background-repeat: repeat-y;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to create rounded corners?",
-        "correct_answer": "border-radius",
-        "incorrect_answers": [
-            "corner-radius",
-            "border-round",
-            "radius"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property sets the width of an element?",
-        "correct_answer": "width",
-        "incorrect_answers": [
-            "size",
-            "element-width",
-            "box-width"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property sets the height of an element?",
-        "correct_answer": "height",
-        "incorrect_answers": [
-            "size",
-            "element-height",
-            "box-height"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to show or hide an element?",
-        "correct_answer": "display",
-        "incorrect_answers": [
-            "visibility",
-            "hide",
-            "show"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you hide an element but keep its space?",
-        "correct_answer": "visibility: hidden;",
-        "incorrect_answers": [
-            "display: none;",
-            "opacity: 0;",
-            "hidden: true;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "How do you completely remove an element from the layout?",
-        "correct_answer": "display: none;",
-        "incorrect_answers": [
-            "visibility: hidden;",
-            "opacity: 0;",
-            "remove: true;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property controls the transparency of an element?",
-        "correct_answer": "opacity",
-        "incorrect_answers": [
-            "alpha",
-            "visibility",
-            "filter"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which position value keeps an element in the normal document flow?",
-        "correct_answer": "static",
-        "incorrect_answers": [
-            "absolute",
-            "fixed",
-            "relative"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which CSS property is used to add a shadow to text?",
-        "correct_answer": "text-shadow",
-        "incorrect_answers": [
-            "font-shadow",
-            "shadow-text",
-            "text-effect"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which CSS property is used to add a shadow to a box?",
-        "correct_answer": "box-shadow",
-        "incorrect_answers": [
-            "div-shadow",
-            "shadow-box",
-            "border-shadow"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property defines the style of a border?",
-        "correct_answer": "border-style",
-        "incorrect_answers": [
-            "border-type",
-            "border-shape",
-            "border-format"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property defines the color of a border?",
-        "correct_answer": "border-color",
-        "incorrect_answers": [
-            "border-style",
-            "outline-color",
-            "color-border"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property defines the width of a border?",
-        "correct_answer": "border-width",
-        "incorrect_answers": [
-            "border-size",
-            "border-thickness",
-            "outline-width"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which display value makes an element a block-level element?",
-        "correct_answer": "display: block;",
-        "incorrect_answers": [
-            "display: inline;",
-            "display: flex;",
-            "display: grid;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which display value makes an element an inline element?",
-        "correct_answer": "display: inline;",
-        "incorrect_answers": [
-            "display: block;",
-            "display: flex;",
-            "display: inline-block;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which display value allows elements to behave both as inline and block?",
-        "correct_answer": "display: inline-block;",
-        "incorrect_answers": [
-            "display: block-inline;",
-            "display: inline-flex;",
-            "display: hybrid;"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which unit is relative to the font-size of the root element?",
-        "correct_answer": "rem",
-        "incorrect_answers": [
-            "em",
-            "px",
-            "%"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which unit is an absolute length in pixels?",
-        "correct_answer": "px",
-        "incorrect_answers": [
-            "em",
-            "rem",
-            "%"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which unit is a percentage of the parent element?",
-        "correct_answer": "%",
-        "incorrect_answers": [
-            "px",
-            "em",
-            "vh"
-        ]
-    },
-    {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which selector targets all elements?",
-        "correct_answer": "*",
-        "incorrect_answers": [
-            "#",
             ".",
-            ":all"
+            "*",
+            "&"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which selector targets a direct child element?",
-        "correct_answer": "parent > child",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "What does sizeof return?",
+        "correct_answer": "Size of data type in bytes",
         "incorrect_answers": [
-            "parent child",
-            "parent + child",
-            "parent ~ child"
+            "Memory address",
+            "Bit length",
+            "Object count"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to control how content overflows its box?",
-        "correct_answer": "overflow",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "Which C++ feature allows code reuse?",
+        "correct_answer": "Inheritance",
         "incorrect_answers": [
-            "scroll",
-            "content-flow",
-            "display"
+            "Encapsulation",
+            "Compilation",
+            "Linking"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which value of overflow shows scrollbars when needed?",
-        "correct_answer": "auto",
+        "category": "c++",
+        "difficulty": "medium",
+        "question": "What is a namespace used for?",
+        "correct_answer": "To avoid name conflicts",
         "incorrect_answers": [
-            "scroll",
-            "visible",
-            "hidden"
+            "To manage memory",
+            "To speed execution",
+            "To define variables"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to change the order of flex items?",
-        "correct_answer": "order",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is the Rule of Three in C++?",
+        "correct_answer": "If a class defines destructor, copy constructor, or copy assignment, it should define all three",
         "incorrect_answers": [
-            "flex-order",
-            "index",
-            "position"
+            "Three inheritance levels",
+            "Three access specifiers",
+            "Three constructors"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property is used to set the direction of flex items?",
-        "correct_answer": "flex-direction",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is undefined behavior?",
+        "correct_answer": "Behavior not defined by the C++ standard",
         "incorrect_answers": [
-            "flex-flow",
-            "flex-align",
-            "flex-orientation"
+            "Compile-time error",
+            "Runtime exception",
+            "Logical error"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property centers items horizontally in a flex container?",
-        "correct_answer": "justify-content",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What does RAII stand for?",
+        "correct_answer": "Resource Acquisition Is Initialization",
         "incorrect_answers": [
-            "align-items",
-            "text-align",
-            "flex-center"
+            "Runtime Allocation In Inheritance",
+            "Resource Allocation In Interface",
+            "Recursive Allocation In Instances"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which property centers items vertically in a flex container?",
-        "correct_answer": "align-items",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is a pure virtual function?",
+        "correct_answer": "A virtual function with no implementation",
         "incorrect_answers": [
-            "justify-content",
-            "vertical-align",
-            "flex-center"
+            "A static function",
+            "A private function",
+            "An inline function"
         ]
     },
     {
-        "category": "css",
-        "difficulty": "easy",
-        "question": "Which at-rule is used to write media queries?",
-        "correct_answer": "@media",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "Which symbol denotes a pure virtual function?",
+        "correct_answer": "= 0",
         "incorrect_answers": [
-            "@query",
-            "@screen",
-            "@responsive"
+            "nullptr",
+            "void",
+            "virtual"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What does JavaScript primarily run on?",
-        "correct_answer": "The browser",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is object slicing?",
+        "correct_answer": "Losing derived class data when assigning to base class",
         "incorrect_answers": [
-            "The database",
-            "The operating system kernel",
-            "The router"
+            "Breaking objects in memory",
+            "Deleting object pointers",
+            "Partial object construction"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which HTML tag is commonly used to include JavaScript code?",
-        "correct_answer": "<script>",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is the purpose of std::move?",
+        "correct_answer": "To enable move semantics",
         "incorrect_answers": [
-            "<javascript>",
-            "<code>",
-            "<js>"
+            "To copy objects",
+            "To delete memory",
+            "To cast types"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which of the following is a correct way to declare a variable in modern JavaScript?",
-        "correct_answer": "let x = 5;",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is a dangling pointer?",
+        "correct_answer": "A pointer referencing deallocated memory",
         "incorrect_answers": [
-            "var: x = 5;",
-            "dim x = 5;",
-            "int x = 5;"
+            "A null pointer",
+            "A constant pointer",
+            "A smart pointer"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which keyword declares a constant in JavaScript?",
-        "correct_answer": "const",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "Which C++ feature supports compile-time polymorphism?",
+        "correct_answer": "Templates",
         "incorrect_answers": [
-            "let",
-            "static",
-            "define"
+            "Virtual functions",
+            "Inheritance",
+            "Dynamic casting"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which keyword was traditionally used to declare variables before ES6?",
-        "correct_answer": "var",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What does const correctness ensure?",
+        "correct_answer": "Objects are not modified unexpectedly",
         "incorrect_answers": [
-            "let",
-            "const",
-            "static"
+            "Better performance",
+            "Memory safety",
+            "Automatic garbage collection"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "How do you write a single-line comment in JavaScript?",
-        "correct_answer": "// comment",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is a smart pointer?",
+        "correct_answer": "An object that manages a pointer automatically",
         "incorrect_answers": [
-            "# comment",
-            "<!-- comment -->",
-            "/* comment */"
+            "A fast pointer",
+            "A pointer to class",
+            "A reference variable"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "How do you write a multi-line comment in JavaScript?",
-        "correct_answer": "/* comment */",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "Which smart pointer allows shared ownership?",
+        "correct_answer": "shared_ptr",
         "incorrect_answers": [
-            "// comment //",
-            "# comment #",
-            "<!-- comment -->"
+            "unique_ptr",
+            "weak_ptr",
+            "auto_ptr"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which symbol is used for strict equality comparison in JavaScript?",
-        "correct_answer": "===",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is multiple inheritance?",
+        "correct_answer": "A class inheriting from more than one base class",
         "incorrect_answers": [
-            "==",
-            "=",
-            "!=="
+            "Multiple constructors",
+            "Multiple objects",
+            "Multiple namespaces"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which operator is used to assign a value to a variable?",
-        "correct_answer": "=",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What problem does virtual inheritance solve?",
+        "correct_answer": "Diamond inheritance problem",
         "incorrect_answers": [
-            "==",
-            "===",
-            ":="
+            "Memory leaks",
+            "Thread safety",
+            "Object slicing"
         ]
     },
     {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What is the output type of the typeof operator?",
-        "correct_answer": "A string",
+        "category": "c++",
+        "difficulty": "hard",
+        "question": "What is constexpr used for?",
+        "correct_answer": "Compile-time evaluation of expressions",
         "incorrect_answers": [
-            "A number",
-            "A boolean",
-            "An object"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which built-in method is used to print something to the browser console?",
-        "correct_answer": "console.log()",
-        "incorrect_answers": [
-            "print()",
-            "alertConsole()",
-            "log.console()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which of the following is a correct string in JavaScript?",
-        "correct_answer": "\"Hello\"",
-        "incorrect_answers": [
-            "Hello",
-            "String(Hello)",
-            "<Hello>"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Arrays in JavaScript are defined using:",
-        "correct_answer": "Square brackets []",
-        "incorrect_answers": [
-            "Curly braces {}",
-            "Angle brackets <>",
-            "Parentheses ()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "How do you create an empty array in JavaScript?",
-        "correct_answer": "let arr = [];",
-        "incorrect_answers": [
-            "let arr = {};",
-            "let arr = ();",
-            "let arr = null[];"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "How do you create an empty object in JavaScript?",
-        "correct_answer": "let obj = {};",
-        "incorrect_answers": [
-            "let obj = [];",
-            "let obj = ();",
-            "let obj = object();"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method adds a new element to the end of an array?",
-        "correct_answer": "push()",
-        "incorrect_answers": [
-            "pop()",
-            "shift()",
-            "unshift()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method removes the last element from an array?",
-        "correct_answer": "pop()",
-        "incorrect_answers": [
-            "push()",
-            "shift()",
-            "delete()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which operator is used for string concatenation in JavaScript?",
-        "correct_answer": "+",
-        "incorrect_answers": [
-            "&",
-            "++",
-            "."
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What will \"\" + 1 + 2 evaluate to in JavaScript?",
-        "correct_answer": "\"12\"",
-        "incorrect_answers": [
-            "\"3\"",
-            "3",
-            "NaN"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which keyword is used to define a function in JavaScript?",
-        "correct_answer": "function",
-        "incorrect_answers": [
-            "def",
-            "func",
-            "method"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which of the following is a function expression?",
-        "correct_answer": "const add = function(a, b) { return a + b; };",
-        "incorrect_answers": [
-            "function add(a, b) { return a + b; }",
-            "func add(a, b) => a + b;",
-            "add(a, b) = a + b;"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which of these is an arrow function?",
-        "correct_answer": "const sum = (a, b) => a + b;",
-        "incorrect_answers": [
-            "const sum(a, b) -> a + b;",
-            "sum = function a, b => a + b;",
-            "function => sum(a, b);"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What does NaN stand for in JavaScript?",
-        "correct_answer": "Not a Number",
-        "incorrect_answers": [
-            "No any Number",
-            "Non applicable Number",
-            "Null and None"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What is the result of 2 + \"2\" in JavaScript?",
-        "correct_answer": "\"22\"",
-        "incorrect_answers": [
-            "4",
-            "NaN",
-            "\"4\""
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What is the result of 2 == \"2\" in JavaScript?",
-        "correct_answer": "true",
-        "incorrect_answers": [
-            "false",
-            "NaN",
-            "undefined"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What is the result of 2 === \"2\" in JavaScript?",
-        "correct_answer": "false",
-        "incorrect_answers": [
-            "true",
-            "NaN",
-            "undefined"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which keyword is used to exit a loop early?",
-        "correct_answer": "break",
-        "incorrect_answers": [
-            "stop",
-            "exit",
-            "cancel"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which keyword skips to the next iteration of a loop?",
-        "correct_answer": "continue",
-        "incorrect_answers": [
-            "skip",
-            "next",
-            "pass"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which loop is guaranteed to run at least once?",
-        "correct_answer": "do...while",
-        "incorrect_answers": [
-            "for",
-            "while",
-            "forEach"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which built-in method converts a JSON string to an object?",
-        "correct_answer": "JSON.parse()",
-        "incorrect_answers": [
-            "JSON.stringify()",
-            "JSON.object()",
-            "JSON.toObject()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which built-in method converts an object to a JSON string?",
-        "correct_answer": "JSON.stringify()",
-        "incorrect_answers": [
-            "JSON.parse()",
-            "JSON.encode()",
-            "JSON.toString()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method rounds a number down to the nearest integer?",
-        "correct_answer": "Math.floor()",
-        "incorrect_answers": [
-            "Math.round()",
-            "Math.ceil()",
-            "Math.down()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method rounds a number up to the nearest integer?",
-        "correct_answer": "Math.ceil()",
-        "incorrect_answers": [
-            "Math.floor()",
-            "Math.roundUp()",
-            "Math.up()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method returns a random number between 0 (inclusive) and 1 (exclusive)?",
-        "correct_answer": "Math.random()",
-        "incorrect_answers": [
-            "Math.rand()",
-            "Math.randomNumber()",
-            "Math.range()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "How do you create a template literal in JavaScript?",
-        "correct_answer": "Using backticks ``",
-        "incorrect_answers": [
-            "Using single quotes ''",
-            "Using double quotes \"\"",
-            "Using angle brackets <>"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which built-in method joins array elements into a string?",
-        "correct_answer": "join()",
-        "incorrect_answers": [
-            "concat()",
-            "combine()",
-            "merge()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method is used to execute a function for each element in an array?",
-        "correct_answer": "forEach()",
-        "incorrect_answers": [
-            "each()",
-            "loop()",
-            "mapAll()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method creates a new array with the results of calling a function on every element?",
-        "correct_answer": "map()",
-        "incorrect_answers": [
-            "forEach()",
-            "filter()",
-            "reduce()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method creates a new array with elements that pass a test?",
-        "correct_answer": "filter()",
-        "incorrect_answers": [
-            "map()",
-            "reduce()",
-            "find()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method reduces an array to a single value?",
-        "correct_answer": "reduce()",
-        "incorrect_answers": [
-            "map()",
-            "filter()",
-            "slice()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which property gives the number of elements in an array?",
-        "correct_answer": "length",
-        "incorrect_answers": [
-            "size",
-            "count",
-            "items"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What is the global object in a browser JavaScript environment?",
-        "correct_answer": "window",
-        "incorrect_answers": [
-            "global",
-            "process",
-            "document"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which object represents the HTML document in the browser?",
-        "correct_answer": "document",
-        "incorrect_answers": [
-            "window",
-            "dom",
-            "html"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method selects an element by its id?",
-        "correct_answer": "document.getElementById()",
-        "incorrect_answers": [
-            "document.queryId()",
-            "document.getById()",
-            "document.selectId()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method can select the first element that matches a CSS selector?",
-        "correct_answer": "document.querySelector()",
-        "incorrect_answers": [
-            "document.query()",
-            "document.select()",
-            "document.getSelector()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which method shows an alert popup with a message?",
-        "correct_answer": "alert()",
-        "incorrect_answers": [
-            "popup()",
-            "message()",
-            "notify()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which built-in function pauses code execution and asks the user for input?",
-        "correct_answer": "prompt()",
-        "incorrect_answers": [
-            "alert()",
-            "confirm()",
-            "input()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which function shows a dialog with OK and Cancel buttons?",
-        "correct_answer": "confirm()",
-        "incorrect_answers": [
-            "alert()",
-            "prompt()",
-            "choice()"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "What does \"use strict\" do in JavaScript?",
-        "correct_answer": "Enables stricter parsing and error handling",
-        "incorrect_answers": [
-            "Makes the code run faster",
-            "Enables TypeScript",
-            "Disables all errors"
-        ]
-    },
-    {
-        "category": "javascript",
-        "difficulty": "easy",
-        "question": "Which statement is used to handle errors in JavaScript?",
-        "correct_answer": "try...catch",
-        "incorrect_answers": [
-            "do...catch",
-            "error...handle",
-            "catch...throw"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is React primarily used for?",
-        "correct_answer": "Building user interfaces",
-        "incorrect_answers": [
-            "Managing databases",
-            "Designing images",
-            "Creating operating systems"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "React is a _____ library.",
-        "correct_answer": "JavaScript",
-        "incorrect_answers": [
-            "Python",
-            "PHP",
-            "C#"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Who developed React?",
-        "correct_answer": "Facebook (Meta)",
-        "incorrect_answers": [
-            "Google",
-            "Microsoft",
-            "Twitter"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What does JSX stand for?",
-        "correct_answer": "JavaScript XML",
-        "incorrect_answers": [
-            "Java Syntax Extension",
-            "JSON XML",
-            "JavaScript eXtension"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "JSX is used to write:",
-        "correct_answer": "HTML-like syntax in JavaScript",
-        "incorrect_answers": [
-            "Database queries",
-            "CSS-only code",
-            "Server-side scripts"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "In React, UI is split into small pieces called:",
-        "correct_answer": "Components",
-        "incorrect_answers": [
-            "Modules",
-            "Packages",
-            "Controllers"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which hook is used to add state in a functional component?",
-        "correct_answer": "useState",
-        "incorrect_answers": [
-            "useEffect",
-            "useContext",
-            "useRef"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which hook is used for side effects like fetching data?",
-        "correct_answer": "useEffect",
-        "incorrect_answers": [
-            "useState",
-            "useMemo",
-            "useCallback"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is the correct way to create a functional component?",
-        "correct_answer": "function MyComponent() { return <div>Hello</div>; }",
-        "incorrect_answers": [
-            "component MyComponent() => <div>Hello</div>",
-            "function MyComponent => <div>Hello</div>;",
-            "let MyComponent = <div>Hello</div>;"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "In JSX, how do you insert a JavaScript expression?",
-        "correct_answer": "Using curly braces {}",
-        "incorrect_answers": [
-            "Using square brackets []",
-            "Using parentheses ()",
-            "Using angle brackets <>"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is a prop in React?",
-        "correct_answer": "A way to pass data from parent to child component",
-        "incorrect_answers": [
-            "A built-in CSS module",
-            "A database connection",
-            "A global state manager"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Props in React are:",
-        "correct_answer": "Read-only",
-        "incorrect_answers": [
-            "Writable from child",
-            "Used only in class components",
-            "Automatically saved to local storage"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is state in React?",
-        "correct_answer": "Data that can change over time inside a component",
-        "incorrect_answers": [
-            "A fixed constant value",
-            "A CSS style object only",
-            "A browser API"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which hook returns a stateful value and a function to update it?",
-        "correct_answer": "useState",
-        "incorrect_answers": [
-            "useEffect",
-            "useReducer",
-            "useRef"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "React uses a _____ DOM to improve performance.",
-        "correct_answer": "Virtual",
-        "incorrect_answers": [
-            "Physical",
-            "Shadow",
-            "Static"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which method is used in React 18 to render an app?",
-        "correct_answer": "ReactDOM.createRoot().render()",
-        "incorrect_answers": [
-            "ReactDOM.renderRoot()",
-            "React.render()",
-            "ReactDOM.init()"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Where do you typically render your main React component?",
-        "correct_answer": "Into a DOM element like <div id=\"root\"></div>",
-        "incorrect_answers": [
-            "Directly into the <body> tag without a container",
-            "Into the <head> tag",
-            "Into a <meta> tag"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "How do you export a component as the default export?",
-        "correct_answer": "export default MyComponent;",
-        "incorrect_answers": [
-            "export MyComponent default;",
-            "export default: MyComponent;",
-            "default export MyComponent;"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "How do you import a default exported component?",
-        "correct_answer": "import MyComponent from \"./MyComponent\";",
-        "incorrect_answers": [
-            "import { MyComponent } from \"./MyComponent\";",
-            "require MyComponent from \"./MyComponent\";",
-            "include MyComponent from \"./MyComponent\";"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "In JSX, which attribute is used instead of \"class\"?",
-        "correct_answer": "className",
-        "incorrect_answers": [
-            "class",
-            "cssClass",
-            "styleClass"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "In JSX, inline styles are passed as:",
-        "correct_answer": "A JavaScript object",
-        "incorrect_answers": [
-            "A plain CSS string only",
-            "An external CSS file",
-            "A JSON file"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "How do you handle a click event in React?",
-        "correct_answer": "Using onClick={handleClick}",
-        "incorrect_answers": [
-            "Using onclick=\"handleClick()\"",
-            "Using click={handleClick}",
-            "Using handleClick(onClick)"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What must be returned from a React component?",
-        "correct_answer": "JSX or null",
-        "incorrect_answers": [
-            "Only a string",
-            "Only a number",
-            "Only plain HTML outside JSX"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "How do you conditionally render content in JSX?",
-        "correct_answer": "Using JavaScript expressions like condition && <div>Content</div>",
-        "incorrect_answers": [
-            "Using an if statement directly in JSX markup",
-            "Using #if directive in JSX",
-            "Using HTML conditional comments"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "When rendering a list in React, what prop should each list item have?",
-        "correct_answer": "key",
-        "incorrect_answers": [
-            "id only",
-            "index only",
-            "name"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Keys in React lists should be:",
-        "correct_answer": "Unique among siblings",
-        "incorrect_answers": [
-            "Random every render",
-            "The same for all items",
-            "The array index always"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which hook provides access to context values?",
-        "correct_answer": "useContext",
-        "incorrect_answers": [
-            "useState",
-            "useEffect",
-            "useReducer"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which hook gives you a mutable value that persists across renders without causing re-renders?",
-        "correct_answer": "useRef",
-        "incorrect_answers": [
-            "useState",
-            "useEffect",
-            "useMemo"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is React Router used for?",
-        "correct_answer": "Handling navigation and routing in a React app",
-        "incorrect_answers": [
-            "Managing global state only",
-            "Making HTTP requests",
-            "Styling components"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which library is commonly used to manage global state in React?",
-        "correct_answer": "Redux",
-        "incorrect_answers": [
-            "Lodash",
-            "Axios",
-            "jQuery"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What does SPA stand for in the context of React apps?",
-        "correct_answer": "Single Page Application",
-        "incorrect_answers": [
-            "Single Process Application",
-            "Server Page Application",
-            "Shared Page Application"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "React components should ideally be:",
-        "correct_answer": "Pure and reusable",
-        "incorrect_answers": [
-            "Tightly coupled and large",
-            "Global and mutable",
-            "Mixed with DOM manipulation code"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is a controlled component in React?",
-        "correct_answer": "A component where form input values are controlled by React state",
-        "incorrect_answers": [
-            "A component controlled by the browser only",
-            "A component with no props",
-            "A component that cannot change its state"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Where is the best place to fetch data in a functional component?",
-        "correct_answer": "Inside useEffect",
-        "incorrect_answers": [
-            "Directly in the component body on every render",
-            "In the JSX markup",
-            "Only in a separate HTML file"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "In useEffect, the second argument is typically:",
-        "correct_answer": "A dependency array",
-        "incorrect_answers": [
-            "A callback to clean memory",
-            "The initial state",
-            "A boolean flag to enable React"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What happens if you pass an empty array [] as the second argument to useEffect?",
-        "correct_answer": "The effect runs only once after the initial render",
-        "incorrect_answers": [
-            "The effect never runs",
-            "The effect runs on every render",
-            "The effect runs only when props change"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is the purpose of the return function inside useEffect?",
-        "correct_answer": "To clean up side effects",
-        "incorrect_answers": [
-            "To return JSX instead of the component",
-            "To initialize state",
-            "To re-render the component"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "React Hook rules say you must only call hooks:",
-        "correct_answer": "At the top level of a React function component or custom hook",
-        "incorrect_answers": [
-            "Inside loops and conditions only",
-            "Inside event handlers only",
-            "Anywhere in any JavaScript file"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Custom hooks in React:",
-        "correct_answer": "Are JavaScript functions whose names start with \"use\"",
-        "incorrect_answers": [
-            "Must return JSX",
-            "Can only be created by React team",
-            "Have to extend a base Hook class"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is React.Fragment used for?",
-        "correct_answer": "To group multiple elements without adding extra DOM nodes",
-        "incorrect_answers": [
-            "To create a new route",
-            "To manage state globally",
-            "To style components with CSS"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What shorthand can be used instead of <React.Fragment> in JSX?",
-        "correct_answer": "<></>",
-        "incorrect_answers": [
-            "<fragment></fragment>",
-            "<F></F>",
-            "<rf></rf>"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which tool is commonly used to create a new React project quickly?",
-        "correct_answer": "Create React App or similar toolchains",
-        "incorrect_answers": [
-            "npm new react-project",
-            "React Maker Studio",
-            "HTML5 Boilerplate"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which command is commonly used to start a React development server?",
-        "correct_answer": "npm start",
-        "incorrect_answers": [
-            "npm run build",
-            "npm react",
-            "react start"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "Which lifecycle concept does useEffect replace from class components?",
-        "correct_answer": "componentDidMount, componentDidUpdate, and componentWillUnmount",
-        "incorrect_answers": [
-            "Only render",
-            "Only constructor",
-            "Only componentWillReceiveProps"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What is the main advantage of React's component-based architecture?",
-        "correct_answer": "Reusability and easier management of UI parts",
-        "incorrect_answers": [
-            "It removes the need for JavaScript",
-            "It automatically writes backend APIs",
-            "It only works with databases"
-        ]
-    },
-    {
-        "category": "react",
-        "difficulty": "easy",
-        "question": "What problem does React mainly solve?",
-        "correct_answer": "Building complex, dynamic UIs efficiently",
-        "incorrect_answers": [
-            "Compiling C++ code",
-            "Designing databases",
-            "Managing operating system processes"
+            "Runtime execution",
+            "Dynamic memory allocation",
+            "Exception handling"
         ]
     }
 ]

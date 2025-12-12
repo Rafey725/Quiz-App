@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { useFonts, Kufam_400Regular, Kufam_700Bold } from '@expo-google-fonts/kufam';
 import { Shadow } from 'react-native-shadow-2'
-import { useNavigation, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
+import { useDispatch } from 'react-redux';
+import { changeCategory } from '@/Redux/categorySlice/categorySlice';
+import { setQuestionNumZero } from '@/Redux/questionNumSlice/questionNumSlice'
+import { newAttempt } from '@/Redux/quizAttemptSlice/quizAttemptSlice';
 
 const Home = () => {
   // Applying Kufam font... 
@@ -23,11 +27,14 @@ const Home = () => {
   };
 
   let router = useRouter()
+  let disptach = useDispatch()
 
   const [inputValue, setInputValue] = useState('')
   function handleTextChange(text: any) {
     setInputValue(text)
   }
+
+  const [attemptId, setAttemptId] = useState(0)
 
   let categories = [
     { name: 'HTML', image: require('@/assets/categories/HTML.png') },
@@ -100,7 +107,7 @@ const Home = () => {
       </View>
 
       {/* Search bar container */}
-      <View style={[styles.justify_between, { columnGap: 40 }]}>
+      <View style={[styles.justify_between, { columnGap: 20 }]}>
         {/* Search bar */}
         <View style={[styles.items_center, styles.justify_between, { width: 'auto', flex: 1, paddingVertical: 2, paddingHorizontal: 7, backgroundColor: tabBarColor, borderRadius: 7 }]}>
           <TextInput
@@ -124,7 +131,15 @@ const Home = () => {
         <View style={[styles.items_center, styles.justify_between]}>
           {categories.map((category, idx) => {
             return (
-              <TouchableOpacity key={idx} onPress={() => router.push('/questions')}
+              <TouchableOpacity
+                key={idx}
+                onPress={() => {
+                  router.push('/questions')
+                  disptach(changeCategory(category.name.toLocaleLowerCase()))
+                  disptach(setQuestionNumZero())
+                  disptach(newAttempt())
+                  // disptach(turnOnLoading())
+                }}
                 style={[styles.items_center, { flexDirection: 'column' }]}>
                 <View style={[styles.justify_items_center, { backgroundColor: tabBarColor, width: 60, height: 42, marginVertical: 10, borderRadius: 5 }]}>
                   <Image source={category.image} />

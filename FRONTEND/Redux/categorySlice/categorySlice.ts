@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    category: ''
+    category: 'html'
 }
+console.log(initialState.category);
 
-const categorySlice = createSlice({
+
+
+export const categorySlice = createSlice({
     name: 'category',
     initialState,
     reducers: {

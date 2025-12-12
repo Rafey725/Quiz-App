@@ -4,18 +4,26 @@ import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { Shadow } from 'react-native-shadow-2'
 import { API_URL } from "@/config/api"
 import { useRouter } from 'expo-router'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { increamentQuestionNum, setQuestionNumZero } from '@/Redux/questionNumSlice/questionNumSlice'
+import { changeCategory } from '@/Redux/categorySlice/categorySlice'
+import FullScreenLoader from './FullScreenLoader'
+import { turnOffLoading, turnOnLoading } from '@/Redux/loadingSlice/loadingSlice'
+import { useQuery } from '@tanstack/react-query'
 
-const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { changePage: any, questions: any, setQuestions: any, score: number, setScore: any }) => {
+const QuizPage = ({ changePage, setTotalQuestions, setScore }: { changePage: any, setTotalQuestions: any, setScore: any }) => {
     let router = useRouter()
+    let dispatch = useDispatch()
     let category = useSelector((state: any) => state.categoryState.category)
-    console.log(category)
-
+    let questionNum = useSelector((state: any) => state.questionNumState.questionNum)
+    // let loading = useSelector((state: any) => state.loadingState.loading)
+    let attemptId = useSelector((state: any) => state.quizAttemptState.attemptId)
 
     const [options, setOptions] = useState<string[]>([])
-    const [questionNum, setQuestionNum] = useState<number>(0)
+    // const [questionNum, setQuestionNum] = useState<number>(0)
     const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>()
     const [selectedOptionText, setSelectedOptionText] = useState<string>('')
+    // const [loading, setLoading] = useState(true)
 
 
     // Shuffling the options
@@ -40,19 +48,39 @@ const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { ch
     }
 
     // Fetching the questions
-    useEffect(() => {
-        const loadQuestions = async () => {
-            try {
-                let res = await fetch(`${API_URL}/questions`)
-                let data = await res.json()
-                setQuestions(data)
-                console.log('Fetched successfully');
-            } catch (err) {
-                console.log("Error fetching questions:", err);
-            }
-        }
-        loadQuestions()
-    }, [])
+    // useEffect(() => {
+    //     const loadQuestions = async () => {
+    //         try {
+    //             // dispatch(turnOnLoading())
+    //             let res = await fetch(`${API_URL}/questions/${category}`)
+    //             let data = await res.json()
+    //             setQuestions(data)
+    //             setTimeout(() => {
+    //                 // dispatch(turnOffLoading())
+    //             }, 200);
+    //             console.log('Fetched successfully');
+    //             // console.log(data)
+    //         } catch (err) {
+    //             console.log("Error fetching questions:", err);
+    //         }
+    //     }
+    //     loadQuestions()
+    // }, [category])
+
+    // Tanstack Query Method
+    const { data: questions = [], isPending, isFetching, error } = useQuery({
+        queryKey: ['questions', category, attemptId],
+        queryFn: async () => {
+            const res = await fetch(`${API_URL}/questions/${category}`)
+            const data = await res.json()
+            setTotalQuestions(data.length)
+            return data
+        },
+        enabled: !!category,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        staleTime: 60_000,
+    })
 
     // Setting options
     useEffect(() => {
@@ -75,7 +103,7 @@ const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { ch
             setScore((prev: number) => prev + 1)
         }
     }
-    console.log('Score:', score);
+    // console.log('Score:', score);
 
     const finishQuiz = () => {
         setSelectedOptionIdx(null)
@@ -83,16 +111,27 @@ const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { ch
         changePage('result-page')
     }
 
+    const quitQuiz = () => {
+        router.push('/(tabs)')
+        dispatch(setQuestionNumZero())
+        setScore(0)
+        // dispatch(changeCategory(''))
+        dispatch(turnOnLoading())
+    }
+
     return (
         <>
+            <FullScreenLoader visible={isPending} />
             <ScrollView style={[styles.main,]}>
                 {/* Header */}
                 <View style={[styles.items_center, {}]}>
-                    <Pressable onPress={() => router.push('/(tabs)')}>
+                    <Pressable onPress={() => {
+                        router.push('/(tabs)')
+                    }}>
                         <Image source={require('@/assets/arrow.png')} style={{ position: 'absolute', top: -13, width: 30, height: 30 }} />
                     </Pressable>
                     <View style={[styles.justify_items_center, { flex: 1, flexDirection: 'column', height: 58 }]}>
-                        <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 18 }]}>HTML</Text>
+                        <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 18 }]}>{category.toLocaleUpperCase()}</Text>
                         <Text style={[styles.text_Kufam_Reg, { color: textSecondary, fontSize: 12 }]}>{questions.length} Questions</Text>
                     </View>
                 </View>
@@ -111,11 +150,7 @@ const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { ch
                                 {/* Question number */}
                                 <View style={[styles.justify_between, {}]}>
                                     <Text style={[styles.text_Kufam_Reg, { color: '#828892ff' }]}>Question: {questionNum + 1}/{questions.length}</Text>
-                                    <Pressable onPress={() => {
-                                        router.push('/(tabs)')
-                                        setQuestionNum(0)
-                                        setScore(0)
-                                    }}>
+                                    <Pressable onPress={quitQuiz}>
                                         <Text style={[styles.text_Kufam_Reg, { color: '#A02525' }]}>Quit</Text>
                                     </Pressable>
                                 </View>
@@ -159,7 +194,7 @@ const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { ch
                         <TouchableOpacity
                             onPress={() => {
                                 if (questionNum < questions.length - 1) {
-                                    setQuestionNum(prev => prev + 1)
+                                    dispatch(increamentQuestionNum())
                                 }
                                 setSelectedOptionIdx(null)
                                 checkClickedOption()
@@ -196,7 +231,7 @@ const QuizPage = ({ changePage, questions, setQuestions, score, setScore }: { ch
                         </TouchableOpacity>
                     </View>
                 }
-            </ScrollView>
+            </ScrollView >
         </>
     )
 }

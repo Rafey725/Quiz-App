@@ -9,9 +9,10 @@ app.use(express.json())
 const port = 3041
 
 
-app.get(`/questions`, async (req, res) => {
+app.get(`/questions/:id`, async (req, res) => {
+    let category = req.params.id
     let questions = await Question.aggregate([
-        { $match: { category: 'html' } },
+        { $match: { category: category } },
         { $sample: { size: 10 } }
     ])
     res.json(questions)

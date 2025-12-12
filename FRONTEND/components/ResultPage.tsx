@@ -4,14 +4,14 @@ import { textPrimary, textSecondary } from '@/constants/colors'
 import { Shadow } from 'react-native-shadow-2'
 import { useRouter } from 'expo-router'
 
-const ResultPage = ({ changePage, questions, score }: any) => {
+const ResultPage = ({ changePage, totalQuestions, score }: any) => {
     const router = useRouter()
     return (
         <View style={[styles.main,]}>
             <View style={[styles.justify_items_center, { flexDirection: 'column', rowGap: 10, flex: 1 }]}>
                 <View style={[styles.justify_items_center, { flexDirection: 'column', backgroundColor: '#17233fff', width: 178, height: 178, borderRadius: 100, borderWidth: 10, borderColor: 'rgba(56, 81, 139, 0.37)' }]}>
                     <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 22, height: 29 }]}>Your Score</Text>
-                    <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 32, height: 40 }]}>{score}/{questions.length}</Text>
+                    <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 32, height: 40 }]}>{score}/{totalQuestions}</Text>
                 </View>
 
                 <View style={[styles.justify_items_center, { flexDirection: 'column', }]}>
