@@ -4,15 +4,28 @@ import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
-const LoginPage = () => {
-    const [email, setEmail] = useState('')
-    const [pass, setPass] = useState('')
+const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const [hidden, setHidden] = useState<boolean>(true)
 
     type LoginForm = {
         email: string,
         password: string
     }
+
+    const inputFields = [
+        {
+            name: 'email' as const,
+            placeholder: 'Enter email address',
+            type: 'email-address' as const,
+            text_type: 'emailAddress' as const,
+        },
+        {
+            name: 'password' as const,
+            placeholder: 'Enter password',
+            type: 'default' as const,
+            text_type: 'password' as const,
+        }
+    ]
 
     const { control, handleSubmit } = useForm<LoginForm>({
         defaultValues: {
@@ -22,32 +35,16 @@ const LoginPage = () => {
     })
 
     const onSubmit = (data: LoginForm) => {
-        console.log(data);
+        console.log(data.email);
+        console.log(data.password);
     }
-
-    const inputFields = [
-        {
-            name: 'email' as const,
-            placeholder: 'Enter email address',
-            value: email,
-            type: 'email-address' as const,
-            text_type: 'emailAddress' as const,
-        },
-        {
-            name: 'password' as const,
-            placeholder: 'Enter password',
-            value: pass,
-            type: 'default' as const,
-            text_type: 'password' as const,
-        }
-    ]
 
     return (
         <View style={[styles.main,]}>
-            <View style={[styles.justify_items_center, { width: '100%', paddingTop: 50, flexDirection: 'column' }]}>
-                <Text style={[styles.text_Kufam_Reg, { color: 'white', height: 40, fontSize: 26, fontWeight: 'bold' }]}>Login</Text>
+            <View style={[styles.justify_items_center, { width: '100%', flexDirection: 'column', backgroundColor: '#0E1328', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 20 }]}>
+                <Text style={[styles.text_Kufam_Reg, { color: '#FFFF', fontSize: 36, fontWeight: 'bold' }]}>Login</Text>
 
-                <View style={{ width: '100%', marginTop:20 }}>
+                <View style={{ width: '100%', marginTop: 20 }}>
                     {inputFields.map((f) => (
                         <View key={f.name} style={styles.inputWrap}>
                             <Controller
@@ -82,6 +79,13 @@ const LoginPage = () => {
                         </Text>
                     </Pressable>
                 </View>
+
+                <View style={[{ display: 'flex', flexDirection: 'row', marginTop: 20 }]}>
+                    <Text style={[{ color: textSecondary }]}>Not have an accont? </Text>
+                    <Pressable onPress={() => changePage('signup')}>
+                        <Text style={[{ color: '#4F6BFF' }]}>Create new account</Text>
+                    </Pressable>
+                </View>
             </View>
         </View >
     )
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         paddingHorizontal: 10,
-        paddingTop: 30,
+        paddingTop: 80,
         backgroundColor: '#050816',
         display: 'flex',
         alignItems: 'center',
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 50,
         borderWidth: 1,
-        borderColor: textSecondary,
+        borderColor: '#1F2A44',
         borderRadius: 5,
         paddingHorizontal: 12,
         display: 'flex',
@@ -138,4 +142,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 50,
         borderRadius: 5,
-        backgroundColor: tabBarCo
+        backgroundColor: '#4F6BFF'
+    }
+})

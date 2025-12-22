@@ -2,10 +2,13 @@ import express from 'express'
 import { db } from './db.ts'
 import { questions } from "./schemas/questionSchema.ts"
 import { eq, sql } from 'drizzle-orm'
+import authRouter from './routes/authRouter.ts'
 
+const port = 3041
 const app = express()
 app.use(express.json())
-const port = 3041
+
+app.use('/auth', authRouter)
 
 app.get(`/questions/:id`, async (req, res) => {
     let category = req.params.id

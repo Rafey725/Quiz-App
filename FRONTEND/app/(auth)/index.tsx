@@ -1,11 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import LoginPage from '@/components/LoginPage'
+'use client'
 
-const index = () => {
-  return (
-    <LoginPage />
-  )
+import React, { useState } from 'react'
+import LoginPage from '@/components/LoginPage'
+import SignUpPage from '@/components/SignUpPage'
+
+const Index = () => {
+    const [pageToBeShown, setPageToBeShown] = useState('login')
+
+    return (
+        <>
+            {
+                pageToBeShown === 'login'
+                    ? <LoginPage changePage={setPageToBeShown} />
+                    : <SignUpPage changePage={setPageToBeShown} />
+            }
+        </>
+    )
 }
 
-export default index
+export default Index
