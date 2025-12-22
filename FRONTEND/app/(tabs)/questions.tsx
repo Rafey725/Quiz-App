@@ -1,8 +1,7 @@
-import { ScrollView, Image, StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import QuizPage from '@/components/QuizPage'
 import ResultPage from '@/components/ResultPage'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const Questions = () => {
@@ -17,15 +16,14 @@ const Questions = () => {
 
   const [renderedPage, setRenderedPage] = useState<string>('quiz-page')
   const [questions, setQuestions] = useState<QuestionsType[]>([])
-  const [score, setScore] = useState<number>(0)
+  const score = useSelector((state: any) => state.scoreState.score)
   const [totalQuestions, setTotalQuestions] = useState<number>(0)
-
 
   return (
     <>
       {
         renderedPage === 'quiz-page'
-          ? <QuizPage changePage={setRenderedPage} setTotalQuestions={setTotalQuestions} score={score} setScore={setScore} />
+          ? <QuizPage changePage={setRenderedPage} setTotalQuestions={setTotalQuestions} />
           : <ResultPage changePage={setRenderedPage} totalQuestions={totalQuestions} score={score} />
       }
     </>

@@ -5,9 +5,10 @@ import { useFonts, Kufam_400Regular, Kufam_700Bold } from '@expo-google-fonts/ku
 import { Shadow } from 'react-native-shadow-2'
 import { useRouter } from 'expo-router';
 import { useDispatch } from 'react-redux';
-import { changeCategory } from '@/Redux/categorySlice/categorySlice';
-import { setQuestionNumZero } from '@/Redux/questionNumSlice/questionNumSlice'
-import { newAttempt } from '@/Redux/quizAttemptSlice/quizAttemptSlice';
+import { changeCategory } from '@/Redux/categorySlice';
+import { setQuestionNumZero } from '@/Redux/questionNumSlice'
+import { newAttempt } from '@/Redux/quizAttemptSlice';
+import { resetScore } from '@/Redux/scoreSlice';
 
 const Home = () => {
   // Applying Kufam font... 
@@ -33,8 +34,6 @@ const Home = () => {
   function handleTextChange(text: any) {
     setInputValue(text)
   }
-
-  const [attemptId, setAttemptId] = useState(0)
 
   let categories = [
     { name: 'HTML', image: require('@/assets/categories/HTML.png') },
@@ -138,7 +137,7 @@ const Home = () => {
                   disptach(changeCategory(category.name.toLocaleLowerCase()))
                   disptach(setQuestionNumZero())
                   disptach(newAttempt())
-                  // disptach(turnOnLoading())
+                  disptach(resetScore())
                 }}
                 style={[styles.items_center, { flexDirection: 'column' }]}>
                 <View style={[styles.justify_items_center, { backgroundColor: tabBarColor, width: 60, height: 42, marginVertical: 10, borderRadius: 5 }]}>

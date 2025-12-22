@@ -1,30 +1,26 @@
 import { ScrollView, Image, StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
+import { textPrimary, textSecondary } from '@/constants/colors'
 import { Shadow } from 'react-native-shadow-2'
 import { API_URL } from "@/config/api"
 import { useRouter } from 'expo-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { increamentQuestionNum, setQuestionNumZero } from '@/Redux/questionNumSlice/questionNumSlice'
-import { changeCategory } from '@/Redux/categorySlice/categorySlice'
+import { increamentQuestionNum, setQuestionNumZero } from '@/Redux/questionNumSlice'
+import { increamentScore, resetScore } from '@/Redux/scoreSlice'
 import FullScreenLoader from './FullScreenLoader'
-import { turnOffLoading, turnOnLoading } from '@/Redux/loadingSlice/loadingSlice'
+import { turnOnLoading } from '@/Redux/loadingSlice'
 import { useQuery } from '@tanstack/react-query'
 
-const QuizPage = ({ changePage, setTotalQuestions, setScore }: { changePage: any, setTotalQuestions: any, setScore: any }) => {
+const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotalQuestions: any }) => {
     let router = useRouter()
     let dispatch = useDispatch()
     let category = useSelector((state: any) => state.categoryState.category)
     let questionNum = useSelector((state: any) => state.questionNumState.questionNum)
-    // let loading = useSelector((state: any) => state.loadingState.loading)
     let attemptId = useSelector((state: any) => state.quizAttemptState.attemptId)
 
     const [options, setOptions] = useState<string[]>([])
-    // const [questionNum, setQuestionNum] = useState<number>(0)
     const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>()
     const [selectedOptionText, setSelectedOptionText] = useState<string>('')
-    // const [loading, setLoading] = useState(true)
-
 
     // Shuffling the options
     function shuffleOptions(arr: any) {
@@ -67,6 +63,7 @@ const QuizPage = ({ changePage, setTotalQuestions, setScore }: { changePage: any
     //     loadQuestions()
     // }, [category])
 
+
     // Tanstack Query Method
     const { data: questions = [], isPending, isFetching, error } = useQuery({
         queryKey: ['questions', category, attemptId],
@@ -100,7 +97,7 @@ const QuizPage = ({ changePage, setTotalQuestions, setScore }: { changePage: any
 
     const checkClickedOption = () => {
         if (selectedOptionText === questions[questionNum].correct_answer) {
-            setScore((prev: number) => prev + 1)
+            dispatch(increamentScore())
         }
     }
     // console.log('Score:', score);
@@ -112,10 +109,9 @@ const QuizPage = ({ changePage, setTotalQuestions, setScore }: { changePage: any
     }
 
     const quitQuiz = () => {
-        router.push('/(tabs)')
+        router.push("/(tabs)")
         dispatch(setQuestionNumZero())
-        setScore(0)
-        // dispatch(changeCategory(''))
+        dispatch(resetScore())
         dispatch(turnOnLoading())
     }
 
