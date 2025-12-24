@@ -10,6 +10,7 @@ import { increamentScore, resetScore } from '@/Redux/scoreSlice'
 import FullScreenLoader from './FullScreenLoader'
 import { turnOnLoading } from '@/Redux/loadingSlice'
 import { useQuery } from '@tanstack/react-query'
+import * as SecureStore from 'expo-secure-store'
 
 const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotalQuestions: any }) => {
     let router = useRouter()
@@ -21,6 +22,8 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     const [options, setOptions] = useState<string[]>([])
     const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>()
     const [selectedOptionText, setSelectedOptionText] = useState<string>('')
+    const [token, setToken] = useState<string | null>(null)
+    const [openLoginForm, setOpenLoginForm] = useState(false)
 
     // Shuffling the options
     function shuffleOptions(arr: any) {
@@ -43,47 +46,53 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
         setOptions(arr)
     }
 
-    // Fetching the questions
-    // useEffect(() => {
-    //     const loadQuestions = async () => {
-    //         try {
-    //             // dispatch(turnOnLoading())
-    //             let res = await fetch(`${API_URL}/questions/${category}`)
-    //             let data = await res.json()
-    //             setQuestions(data)
-    //             setTimeout(() => {
-    //                 // dispatch(turnOffLoading())
-    //             }, 200);
-    //             console.log('Fetched successfully');
-    //             // console.log(data)
-    //         } catch (err) {
-    //             console.log("Error fetching questions:", err);
-    //         }
-    //     }
-    //     loadQuestions()
-    // }, [category])
-
+    // Load token once
+    useEffect(() => {
+        (async () => {
+            try {
+                const token = await SecureStore.getItemAsync('token')
+                setToken(token)
+                console.log(token)
+            } catch (err) {
+                console.log('Loding the token, Error: ', err)
+            }
+        })()
+    }, [])
 
     // Tanstack Query Method
     const { data: questions = [], isPending, isFetching, error } = useQuery({
         queryKey: ['questions', category, attemptId],
         queryFn: async () => {
-            const res = await fetch(`${API_URL}/questions/${category}`)
-            const data = await res.json()
-            setTotalQuestions(data.length)
-            return data
+            try {
+                const res = await fetch(`${API_URL}/questions/${category}`, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+
+                if (!res.ok) throw new Error('Failed to load questions')
+                const data = await res.json()
+                setTotalQuestions(data.length)
+                return data
+            } catch (err) {
+
+                console.log('Something is wrong: ', err);
+                throw err
+            }
         },
-        enabled: !!category,
+        enabled: !!category && !!token,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
         staleTime: 60_000,
     })
 
+
     // Setting options
     useEffect(() => {
-        if (questions.length === 0) return
+        if (questions.length === 0 || questions === undefined) return
         let allOptions = [questions[questionNum].correct_answer, ...questions[questionNum].incorrect_answers]
-        // console.log(allOptions)
         shuffleOptions(allOptions)
     }, [questionNum, questions])
 
@@ -92,8 +101,6 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
         setSelectedOptionIdx(optionIdx)
         setSelectedOptionText(optionText)
     }
-    // console.log(selectedOptionIdx)
-    // console.log(selectedOptionText)
 
     const checkClickedOption = () => {
         if (selectedOptionText === questions[questionNum].correct_answer) {

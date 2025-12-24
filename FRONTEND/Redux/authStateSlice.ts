@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { router } from 'expo-router'
 
 const authStateSlice = createSlice({
     name: 'authState',
@@ -6,8 +7,12 @@ const authStateSlice = createSlice({
         authState: false,
     },
     reducers: {
+        setAuthStateTrue: (state) => {
+            state.authState = true
+            router.replace('/(tabs)')
+        }
     }
 })
 
-export const { } = authStateSlice.actions
+export const { setAuthStateTrue } = authStateSlice.actions
 export default authStateSlice.reducer

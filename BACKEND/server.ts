@@ -3,6 +3,7 @@ import { db } from './db.ts'
 import { questions } from "./schemas/questionSchema.ts"
 import { eq, sql } from 'drizzle-orm'
 import authRouter from './routes/authRouter.ts'
+import { requireAuth } from './middlewares/requireAuth.ts'
 
 const port = 3041
 const app = express()
@@ -10,7 +11,7 @@ app.use(express.json())
 
 app.use('/auth', authRouter)
 
-app.get(`/questions/:id`, async (req, res) => {
+app.get(`/questions/:id`, requireAuth, async (req, res) => {
     let category = req.params.id
     let fetchedQuestions = await db
         .select()

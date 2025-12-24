@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { useState } from 'react'
@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 
 const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const [hidden, setHidden] = useState<boolean>(true)
+    const [error, setError] = useState('')
 
     type SignupForm = {
         fullName: string,
@@ -53,7 +54,7 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
     })
 
     // Sign up function
-    const signup = async ({ fullName, email, password }: { fullName: string, email: string, password: string }) => {
+    const signup = async ({ fullName, email, password }: SignupForm) => {
         let res = await fetch(`${API_URL}/auth/signup`, {
             method: 'POST',
             headers: {
@@ -65,8 +66,10 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
                 pass: password
             })
         })
+        // if (!res.ok) throw new Error("Signup failed");
+
         let data = await res.json()
-        console.log(data.message);
+        return data
 
     }
 
@@ -75,8 +78,22 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
         mutationFn: signup
     })
 
-    const onSubmit = (data: SignupForm) => {
-        signupMutation.mutate(data)
+    const onSubmit = async (data: SignupForm) => {
+        // Pass validation
+        if (!(data.password === data.confirmPassword)) {
+            setError('Password is incorrect')
+            return
+        } else { setError('') }
+        // Fetching
+        let res = await signupMutation.mutateAsync(data)
+        // Error checking
+        if (res.message.endsWith('exists')) {
+            setError('Email already exists')
+        } else if (res.message === 'Invalid info') {
+            setError('Invalid info')
+        }
+
+        console.log(res.message);
     }
 
     return (
@@ -106,18 +123,25 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
                                 )}
                             />
                             {(f.name === 'password' || f.name === 'confirmPassword') &&
-                                <Pressable onPress={() => setHidden(prev => !prev)}>
+                                <TouchableOpacity onPress={() => setHidden(prev => !prev)}>
                                     <Text style={{ color: 'white' }}>{hidden ? "Show" : "Hide"}</Text>
-                                </Pressable>
+                                </TouchableOpacity>
                             }
                         </View>
                     ))}
 
-                    <Pressable onPress={handleSubmit(onSubmit)} style={[styles.submitBtn]}>
+                    {error && <View style={styles.errorWrapper}>
+                        <Text style={styles.errorText}>
+                            {error}
+                        </Text>
+                    </View>}
+
+
+                    <TouchableOpacity onPress={handleSubmit(onSubmit)} style={[styles.submitBtn]}>
                         <Text style={[styles.text_secondary, { fontSize: 20, fontWeight: 'semibold' }]}>
                             Sign up
                         </Text>
-                    </Pressable>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={[{ display: 'flex', flexDirection: 'row', marginTop: 20 }]}>
@@ -183,5 +207,21 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         backgroundColor: '#4F6BFF'
+    },
+    errorWrapper: {
+        width: '100%',
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        backgroundColor: '#3b0d0d', // deep muted red
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#7a1c1c',
+        marginTop: 8,
+    },
+    errorText: {
+        color: '#ffe3e3ff',
+        fontSize: 13,
+        lineHeight: 18,
+        fontWeight: '500',
     }
 })

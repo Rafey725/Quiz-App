@@ -13,7 +13,7 @@ const RootNavigator = () => {
 
     return (
         <Stack>
-            {authState
+            {authState === true
                 ? <Stack.Screen
                     name="(tabs)"
                     options={{
