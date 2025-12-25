@@ -88,11 +88,11 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
         let res = await signupMutation.mutateAsync(data)
         // Error checking
         if (res.message.endsWith('exists')) {
-            setError('Email already exists')
+            return setError('Email already exists')
         } else if (res.message === 'Invalid info') {
-            setError('Invalid info')
+            return setError('Invalid info')
         }
-
+        changePage('login')
         console.log(res.message);
     }
 

@@ -4,11 +4,15 @@ import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { useFonts, Kufam_400Regular, Kufam_700Bold } from '@expo-google-fonts/kufam';
 import { Shadow } from 'react-native-shadow-2'
 import { useRouter } from 'expo-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeCategory } from '@/Redux/categorySlice';
 import { setQuestionNumZero } from '@/Redux/questionNumSlice'
 import { newAttempt } from '@/Redux/quizAttemptSlice';
 import { resetScore } from '@/Redux/scoreSlice';
+import { useQuery } from '@tanstack/react-query';
+import { API_URL } from '@/config/api';
+import * as SecureStore from 'expo-secure-store'
+import { setToken } from '@/Redux/tokenSlice';
 
 const Home = () => {
   // Applying Kufam font... 
@@ -86,6 +90,36 @@ const Home = () => {
     },
   ]
 
+  const dispatch = useDispatch()
+  const token = useSelector((state: any) => state.tokenState.token)
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = await SecureStore.getItemAsync('token')
+        disptach(setToken(token))
+      } catch (err) {
+        console.log('Loading the token, Error: ', err)
+      }
+    })()
+  }, [])
+
+  // Fetching user data
+  const { data: userInfo, isPending } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: async () => {
+      const res = await fetch(`${API_URL}/auth/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      const data = await res.json()
+      return data
+    },
+    enabled: !!token
+  })
+
   return (
     <ScrollView style={styles.main}>
       {/* Profile header */}
@@ -93,8 +127,8 @@ const Home = () => {
         <View style={{ display: 'flex', columnGap: 5, flexDirection: 'row', alignItems: 'center' }}>
           <Image source={require('@/assets/profile-avatar.png')} style={{ width: 50, height: 50, borderRadius: 50 }} />
           <View>
-            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, opacity: 0.8 }]}>Aamir</Text>
-            <Text style={[styles.text_Kufam_Reg, { color: textSecondary }]}>ID-1809</Text>
+            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo ? userInfo.username : 'Aamir'}</Text>
+            <Text style={[styles.text_Kufam_Reg, { color: textSecondary }]}>ID-{userInfo ? userInfo.id : '1809'}</Text>
           </View>
         </View>
         <Image source={require('@/assets/diamond-image.png')} style={{ width: 65, height: 27, }} />

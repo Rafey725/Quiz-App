@@ -4,6 +4,7 @@ import loadingReducer from '@/Redux/loadingSlice'
 import quizAttemptReducer from '@/Redux/quizAttemptSlice'
 import scoreReducer from '@/Redux/scoreSlice'
 import authStateReducer from '@/Redux/authStateSlice'
+import tokenReducer from '@/Redux/tokenSlice'
 import { configureStore } from '@reduxjs/toolkit'
 
 const store = configureStore({
@@ -13,7 +14,8 @@ const store = configureStore({
         loadingState: loadingReducer,
         quizAttemptState: quizAttemptReducer,
         scoreState: scoreReducer,
-        authState: authStateReducer
+        authState: authStateReducer,
+        tokenState: tokenReducer
     }
 })
 
