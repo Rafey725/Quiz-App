@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
@@ -9,6 +9,7 @@ import * as SecureStore from 'expo-secure-store'
 import { setAuthStateTrue } from '@/Redux/authStateSlice'
 import { useDispatch } from 'react-redux'
 import FullScreenLoader from './FullScreenLoader'
+import { turnOffLoading } from '@/Redux/loadingSlice'
 
 const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const dispatch = useDispatch()
@@ -35,6 +36,12 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
             text_type: 'password' as const,
         }
     ]
+
+    useEffect(() => {
+        setTimeout(() => {
+            dispatch(turnOffLoading())
+        }, 500);
+    }, [])
 
     const { control, handleSubmit } = useForm<LoginForm>({
         defaultValues: {

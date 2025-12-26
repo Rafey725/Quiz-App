@@ -4,7 +4,7 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'quiz_db',
+    database: 'quizdb',
     password: 'hanzila_db',
     port: 5432
 })

@@ -22,7 +22,7 @@ export const requireAuth = (req: authRequest, res: Response, next: NextFunction)
         req.user = decoded as authPayload
         next()
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(401).json({ message: 'Invalid token' })
     }
 

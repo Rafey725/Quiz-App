@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
 import { useFonts, Kufam_400Regular, Kufam_700Bold } from '@expo-google-fonts/kufam';
 import { Shadow } from 'react-native-shadow-2'
@@ -13,6 +13,11 @@ import { useQuery } from '@tanstack/react-query';
 import { API_URL } from '@/config/api';
 import * as SecureStore from 'expo-secure-store'
 import { setToken } from '@/Redux/tokenSlice';
+import { setUserInfo } from '@/Redux/userInfoSlice';
+import { LoginFormPreview } from '@/components/LoginFormPreview';
+import { setAuthStateFalse } from '@/Redux/authStateSlice';
+import { turnOnLoading } from '@/Redux/loadingSlice';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home = () => {
   // Applying Kufam font... 
@@ -91,22 +96,42 @@ const Home = () => {
   ]
 
   const dispatch = useDispatch()
+  const userInfo = useSelector((state: any) => state.userInfoState.userInfo)
   const token = useSelector((state: any) => state.tokenState.token)
+  const authState = useSelector((state: any) => state.authState.authState)
+  const [loginPreview, setLoginPreview] = useState(false)
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const token = await SecureStore.getItemAsync('token')
-        disptach(setToken(token))
-      } catch (err) {
-        console.log('Loading the token, Error: ', err)
-      }
-    })()
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const token = await SecureStore.getItemAsync('token')
+  //       disptach(setToken(token))
+  //     } catch (err) {
+  //       console.log('Loading the token, Error: ', err)
+  //     }
+  //   })()
+  // }, [authState])
+
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
+
+      (async () => {
+        try {
+          const token = await SecureStore.getItemAsync('token')
+          if (isActive) disptach(setToken(token))
+        } catch (err) {
+          console.log('Loading the token, Error: ', err)
+        }
+      })();
+
+      return () => isActive = false
+    }, [dispatch])
+  )
 
   // Fetching user data
-  const { data: userInfo, isPending } = useQuery({
-    queryKey: ['userInfo'],
+  const { data, isPending } = useQuery({
+    queryKey: ['userInfoData', token],
     queryFn: async () => {
       const res = await fetch(`${API_URL}/auth/me`, {
         method: "GET",
@@ -115,10 +140,25 @@ const Home = () => {
         }
       })
       const data = await res.json()
+      dispatch(setUserInfo(data))
       return data
     },
     enabled: !!token
   })
+
+  // handle click on cateory
+  const handleCategoryClick = (category: any) => {
+    if (!!userInfo?.username) {
+      disptach(changeCategory(category.name.toLocaleLowerCase()))
+      disptach(setQuestionNumZero())
+      disptach(newAttempt())
+      disptach(resetScore())
+      router.push('/questions')
+    } else {
+      dispatch(turnOnLoading())
+      router.replace('/(auth)')
+    }
+  }
 
   return (
     <ScrollView style={styles.main}>
@@ -127,8 +167,8 @@ const Home = () => {
         <View style={{ display: 'flex', columnGap: 5, flexDirection: 'row', alignItems: 'center' }}>
           <Image source={require('@/assets/profile-avatar.png')} style={{ width: 50, height: 50, borderRadius: 50 }} />
           <View>
-            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo ? userInfo.username : 'Aamir'}</Text>
-            <Text style={[styles.text_Kufam_Reg, { color: textSecondary }]}>ID-{userInfo ? userInfo.id : '1809'}</Text>
+            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo.username ? userInfo.username : 'Aamir'}</Text>
+            <Text style={[styles.text_Kufam_Reg, { color: textSecondary }]}>ID-{userInfo.id ? userInfo.id : '1809'}</Text>
           </View>
         </View>
         <Image source={require('@/assets/diamond-image.png')} style={{ width: 65, height: 27, }} />
@@ -166,13 +206,7 @@ const Home = () => {
             return (
               <TouchableOpacity
                 key={idx}
-                onPress={() => {
-                  router.push('/questions')
-                  disptach(changeCategory(category.name.toLocaleLowerCase()))
-                  disptach(setQuestionNumZero())
-                  disptach(newAttempt())
-                  disptach(resetScore())
-                }}
+                onPress={() => handleCategoryClick(category)}
                 style={[styles.items_center, { flexDirection: 'column' }]}>
                 <View style={[styles.justify_items_center, { backgroundColor: tabBarColor, width: 60, height: 42, marginVertical: 10, borderRadius: 5 }]}>
                   <Image source={category.image} />

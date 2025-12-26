@@ -3,9 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     category: 'html'
 }
-console.log(initialState.category);
-
-
 
 export const categorySlice = createSlice({
     name: 'category',

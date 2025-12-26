@@ -6,6 +6,7 @@ import scoreReducer from '@/Redux/scoreSlice'
 import authStateReducer from '@/Redux/authStateSlice'
 import tokenReducer from '@/Redux/tokenSlice'
 import { configureStore } from '@reduxjs/toolkit'
+import userInfoReducer from '@/Redux/userInfoSlice'
 
 const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
         quizAttemptState: quizAttemptReducer,
         scoreState: scoreReducer,
         authState: authStateReducer,
-        tokenState: tokenReducer
+        tokenState: tokenReducer,
+        userInfoState: userInfoReducer,
     }
 })
 

@@ -3,9 +3,12 @@ import React from 'react'
 import { textPrimary, textSecondary } from '@/constants/colors'
 import { Shadow } from 'react-native-shadow-2'
 import { useRouter } from 'expo-router'
+import { useSelector } from 'react-redux'
 
 const ResultPage = ({ changePage, totalQuestions, score }: any) => {
     const router = useRouter()
+    const userInfo = useSelector((state: any) => state.userInfoState.userInfo)
+
     return (
         <View style={[styles.main,]}>
             <View style={[styles.justify_items_center, { flexDirection: 'column', rowGap: 10, flex: 1 }]}>
@@ -16,7 +19,7 @@ const ResultPage = ({ changePage, totalQuestions, score }: any) => {
 
                 <View style={[styles.justify_items_center, { flexDirection: 'column', }]}>
                     <Text style={[styles.text_Kufam_Reg, { color: '#1c4581ff', fontSize: 24, height: 35 }]}>Congratulation</Text>
-                    <Text style={[styles.text_Kufam_Reg, { color: '#1c4581ff', fontSize: 18, height: 29 }]}>Great job, Aamir! You Did It</Text>
+                    <Text style={[styles.text_Kufam_Reg, { color: '#1c4581ff', fontSize: 18, height: 29 }]}>Great job, {userInfo ? userInfo.username : 'Aamir'}! You Did It</Text>
                 </View>
             </View>
 

@@ -59,7 +59,7 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
         })()
     }, [])
 
-    // Tanstack Query Method
+    // Tanstack Query Method for fetching questions
     const { data: questions = [], isPending, isFetching, error } = useQuery({
         queryKey: ['questions', category, attemptId],
         queryFn: async () => {
@@ -77,7 +77,6 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
                 setTotalQuestions(data.length)
                 return data
             } catch (err) {
-
                 console.log('Something is wrong: ', err);
                 throw err
             }

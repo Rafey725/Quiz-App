@@ -9,12 +9,12 @@ type LoginFormPreviewProps = {
     errorText?: string
 }
 
-export const LoginFormPreview = ({
-    onOpenLogin,
-    onOpenSignup,
-    errorText,
-}: LoginFormPreviewProps) => {
+export const LoginFormPreview = () => {
     const [hidden, setHidden] = useState(true)
+
+    const onOpenLogin = () => {
+
+    }
 
     return (
         <View
@@ -68,11 +68,11 @@ export const LoginFormPreview = ({
                 </View>
 
                 {/* Optional: show a demo error style */}
-                {errorText ? (
+                {/* {errorText ? (
                     <View style={styles.errorWrapper}>
                         <Text style={styles.errorText}>{errorText}</Text>
                     </View>
-                ) : null}
+                ) : null} */}
 
                 {/* This is the only real action: open real login page */}
                 <Pressable onPress={onOpenLogin} style={styles.submitBtn}>
@@ -85,12 +85,12 @@ export const LoginFormPreview = ({
             <View style={[{ display: "flex", flexDirection: "row", marginTop: 20 }]}>
                 <Text style={[{ color: textSecondary }]}>Not have an accont? </Text>
 
-                <Pressable
+                {/* <Pressable
                     onPress={onOpenSignup ?? onOpenLogin}
                     hitSlop={10}
                 >
                     <Text style={[{ color: "#4F6BFF" }]}>Create new account</Text>
-                </Pressable>
+                </Pressable> */}
             </View>
         </View>
     )
