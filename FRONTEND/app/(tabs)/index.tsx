@@ -14,7 +14,6 @@ import { API_URL } from '@/config/api';
 import * as SecureStore from 'expo-secure-store'
 import { setToken } from '@/Redux/tokenSlice';
 import { setUserInfo } from '@/Redux/userInfoSlice';
-import { LoginFormPreview } from '@/components/LoginFormPreview';
 import { setAuthStateFalse } from '@/Redux/authStateSlice';
 import { turnOnLoading } from '@/Redux/loadingSlice';
 import { useFocusEffect } from '@react-navigation/native';
