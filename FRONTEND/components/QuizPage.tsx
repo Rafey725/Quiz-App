@@ -1,8 +1,8 @@
 import { ScrollView, Image, StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { textPrimary, textSecondary } from '@/constants/colors'
+import colors from '@/constants/colors'
 import { Shadow } from 'react-native-shadow-2'
-import { API_URL } from "@/config/api"
+import API_URL from "@/config/api"
 import { useRouter } from 'expo-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { increamentQuestionNum, setQuestionNumZero } from '@/Redux/questionNumSlice'
@@ -11,6 +11,7 @@ import FullScreenLoader from './FullScreenLoader'
 import { turnOnLoading } from '@/Redux/loadingSlice'
 import { useQuery } from '@tanstack/react-query'
 import * as SecureStore from 'expo-secure-store'
+import { useGetQuestions } from '@/hooks/useGetQuestions'
 
 const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotalQuestions: any }) => {
     let router = useRouter()
@@ -18,12 +19,12 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     let category = useSelector((state: any) => state.categoryState.category)
     let questionNum = useSelector((state: any) => state.questionNumState.questionNum)
     let attemptId = useSelector((state: any) => state.quizAttemptState.attemptId)
+    let token = useSelector((state: any) => state.tokenState.token)
 
     const [options, setOptions] = useState<string[]>([])
     const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>()
     const [selectedOptionText, setSelectedOptionText] = useState<string>('')
-    const [token, setToken] = useState<string | null>(null)
-    const [openLoginForm, setOpenLoginForm] = useState(false)
+    // const [token, setToken] = useState<string | null>(null)
 
     // Shuffling the options
     function shuffleOptions(arr: any) {
@@ -41,55 +42,22 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
         let select3 = arr[ranNum3]
         arr[ranNum3] = arr[1]
         arr[1] = select3
-
-        // console.log(arr)
         setOptions(arr)
     }
 
-    // Load token once
-    useEffect(() => {
-        (async () => {
-            try {
-                const token = await SecureStore.getItemAsync('token')
-                setToken(token)
-                console.log(token)
-            } catch (err) {
-                console.log('Loding the token, Error: ', err)
-            }
-        })()
-    }, [])
-
-    // Tanstack Query Method for fetching questions
-    const { data: questions = [], isPending, isFetching, error } = useQuery({
-        queryKey: ['questions', category, attemptId],
-        queryFn: async () => {
-            try {
-                const res = await fetch(`${API_URL}/questions/${category}`, {
-                    method: 'GET',
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-
-                if (!res.ok) throw new Error('Failed to load questions')
-                const data = await res.json()
-                setTotalQuestions(data.length)
-                return data
-            } catch (err) {
-                console.log('Something is wrong: ', err);
-                throw err
-            }
-        },
-        enabled: !!category && !!token,
-        refetchOnWindowFocus: false,
-        refetchOnReconnect: false,
-        staleTime: 60_000,
-    })
+    // Fetching questions 
+    const { data: questions, isPending } = useGetQuestions({ 
+        endpoint: `questions/${category}`, 
+        category:category,
+        token:token,
+        setTotalQuestions:setTotalQuestions,
+        attemptId:attemptId
+     })
 
 
     // Setting options
     useEffect(() => {
+        if (!questions) return
         if (questions.length === 0 || questions === undefined) return
         let allOptions = [questions[questionNum].correct_answer, ...questions[questionNum].incorrect_answers]
         shuffleOptions(allOptions)
@@ -102,7 +70,7 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     }
 
     const checkClickedOption = () => {
-        if (selectedOptionText === questions[questionNum].correct_answer) {
+        if (selectedOptionText === questions?.[questionNum].correct_answer) {
             dispatch(increamentScore())
         }
     }
@@ -133,8 +101,8 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
                         <Image source={require('@/assets/arrow.png')} style={{ position: 'absolute', top: -13, width: 30, height: 30 }} />
                     </Pressable>
                     <View style={[styles.justify_items_center, { flex: 1, flexDirection: 'column', height: 58 }]}>
-                        <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 18 }]}>{category.toLocaleUpperCase()}</Text>
-                        <Text style={[styles.text_Kufam_Reg, { color: textSecondary, fontSize: 12 }]}>{questions.length} Questions</Text>
+                        <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 18 }]}>{category.toLocaleUpperCase()}</Text>
+                        <Text style={[styles.text_Kufam_Reg, { color: colors.textSecondary, fontSize: 12 }]}>{questions?.length} Questions</Text>
                     </View>
                 </View>
 
@@ -151,14 +119,14 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
                             <View style={[{ flex: 1, }]}>
                                 {/* Question number */}
                                 <View style={[styles.justify_between, {}]}>
-                                    <Text style={[styles.text_Kufam_Reg, { color: '#828892ff' }]}>Question: {questionNum + 1}/{questions.length}</Text>
+                                    <Text style={[styles.text_Kufam_Reg, { color: '#828892ff' }]}>Question: {questionNum + 1}/{questions?.length}</Text>
                                     <Pressable onPress={quitQuiz}>
                                         <Text style={[styles.text_Kufam_Reg, { color: '#A02525' }]}>Quit</Text>
                                     </Pressable>
                                 </View>
 
                                 {/* Question */}
-                                <Text style={[styles.text_Kufam_Reg, { color: textPrimary, height: 'auto', marginVertical: 8 }]}>{questions[questionNum] ? questions[questionNum].question : null}</Text>
+                                <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, height: 'auto', marginVertical: 8 }]}>{questions?.[questionNum] ? questions[questionNum].question : null}</Text>
 
                                 {/* Options */}
                                 <View style={[{ rowGap: 15 }]}>
@@ -190,12 +158,12 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
                     </Shadow>
                 </View>
 
-                {questionNum < questions.length - 1
+                {questionNum < (questions?.length ?? 0) - 1
                     // Next button
                     ? < View style={[styles.items_center, { justifyContent: 'flex-end', paddingHorizontal: 18 }]}>
                         <TouchableOpacity
                             onPress={() => {
-                                if (questionNum < questions.length - 1) {
+                                if (questionNum < (questions?.length ?? 0) - 1) {
                                     dispatch(increamentQuestionNum())
                                 }
                                 setSelectedOptionIdx(null)
@@ -254,7 +222,7 @@ const styles = StyleSheet.create({
     justify_between: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
     items_center: { display: 'flex', flexDirection: 'row', alignItems: 'center' },
     justify_items_center: { display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-    text_primary: { color: textPrimary },
-    text_secondary: { color: textSecondary },
+    text_primary: { color: colors.textPrimary },
+    text_secondary: { color: colors.textSecondary },
     text_Kufam_Reg: { height: 28, fontFamily: 'Kufam_400Regular' }
 })

@@ -11,8 +11,8 @@ app.use(express.json())
 
 app.use('/auth', authRouter)
 
-app.get(`/questions/:id`, requireAuth, async (req, res) => {
-    let category = req.params.id
+app.get(`/questions/:category`, requireAuth, async (req, res) => {
+    let category = req.params.category
     let fetchedQuestions = await db
         .select()
         .from(questions)

@@ -1,7 +1,7 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
-import { tabBarColor } from '@/constants/colors'
+import colors from '@/constants/colors'
 
 
 let homeFocused = require("@/assets/icons/focused/home.png")
@@ -49,7 +49,7 @@ const _layout = () => {
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    backgroundColor: tabBarColor
+                    backgroundColor: colors.tabBarColor
                 }
             }}
         >
