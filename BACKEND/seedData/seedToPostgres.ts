@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const questionsFilePath = path.join(__dirname, 'allQuestions.json')
+const questionsFilePath = path.join(__dirname, '../allQuestions/allQuestions.json')
 
 let questionsData = JSON.parse(fs.readFileSync(questionsFilePath, "utf-8"))
 

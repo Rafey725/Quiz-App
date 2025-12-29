@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
-import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
+import colors from '@/constants/colors'
 import { useFonts, Kufam_400Regular, Kufam_700Bold } from '@expo-google-fonts/kufam';
 import { Shadow } from 'react-native-shadow-2'
 import { useRouter } from 'expo-router';
@@ -10,13 +10,14 @@ import { setQuestionNumZero } from '@/Redux/questionNumSlice'
 import { newAttempt } from '@/Redux/quizAttemptSlice';
 import { resetScore } from '@/Redux/scoreSlice';
 import { useQuery } from '@tanstack/react-query';
-import { API_URL } from '@/config/api';
+import API_URL from '@/config/api';
 import * as SecureStore from 'expo-secure-store'
 import { setToken } from '@/Redux/tokenSlice';
 import { setUserInfo } from '@/Redux/userInfoSlice';
-import { setAuthStateFalse } from '@/Redux/authStateSlice';
 import { turnOnLoading } from '@/Redux/loadingSlice';
 import { useFocusEffect } from '@react-navigation/native';
+import { useGetMe } from '@/hooks/useGetMe';
+import FullScreenLoader from '@/components/FullScreenLoader';
 
 const Home = () => {
   // Applying Kufam font... 
@@ -116,23 +117,9 @@ const Home = () => {
   )
 
   // Fetching user data
-  const { data, isPending } = useQuery({
-    queryKey: ['userInfoData', token],
-    queryFn: async () => {
-      const res = await fetch(`${API_URL}/auth/me`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      const data = await res.json()
-      dispatch(setUserInfo(data))
-      return data
-    },
-    enabled: !!token
-  })
+  const { data, isPending } = useGetMe({ endpoint: 'auth/me', token: token })
 
-  // handle click on cateory
+  // Handle click on cateory
   const handleCategoryClick = (category: any) => {
     if (!!userInfo?.username) {
       disptach(changeCategory(category.name.toLocaleLowerCase()))
@@ -147,99 +134,102 @@ const Home = () => {
   }
 
   return (
-    <ScrollView style={styles.main}>
-      {/* Profile header */}
-      <View style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <View style={{ display: 'flex', columnGap: 5, flexDirection: 'row', alignItems: 'center' }}>
-          <Image source={require('@/assets/profile-avatar.png')} style={{ width: 50, height: 50, borderRadius: 50 }} />
-          <View>
-            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo.username ? userInfo.username : 'Aamir'}</Text>
-            <Text style={[styles.text_Kufam_Reg, { color: textSecondary }]}>ID-{userInfo.id ? userInfo.id : '1809'}</Text>
+    <>
+      <FullScreenLoader visible={isPending} />
+      <ScrollView style={styles.main}>
+        {/* Profile header */}
+        <View style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View style={{ display: 'flex', columnGap: 5, flexDirection: 'row', alignItems: 'center' }}>
+            <Image source={require('@/assets/profile-avatar.png')} style={{ width: 50, height: 50, borderRadius: 50 }} />
+            <View>
+              <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo.username ? userInfo.username : 'Aamir'}</Text>
+              <Text style={[styles.text_Kufam_Reg, { color: colors.textSecondary }]}>ID-{userInfo.id ? userInfo.id : '1809'}</Text>
+            </View>
+          </View>
+          <Image source={require('@/assets/diamond-image.png')} style={{ width: 65, height: 27, }} />
+        </View>
+
+        {/* Hero banner */}
+        <View style={[styles.justify_items_center, { paddingVertical: 10 }]}>
+          <Image source={require('@/assets/hero-image.png')} resizeMode='cover' style={{ width: '100%', height: 139, borderRadius: 7, marginVertical: 10 }} />
+        </View>
+
+        {/* Search bar container */}
+        <View style={[styles.justify_between, { columnGap: 20 }]}>
+          {/* Search bar */}
+          <View style={[styles.items_center, styles.justify_between, { width: 'auto', flex: 1, paddingVertical: 2, paddingHorizontal: 7, backgroundColor: colors.tabBarColor, borderRadius: 7 }]}>
+            <TextInput
+              style={{ color: '#E8E8E8' }}
+              placeholder='Search'
+              placeholderTextColor='#e8e8e898'
+              value={inputValue}
+              onChangeText={handleTextChange}
+            />
+            <Image source={require('@/assets/search-icon.png')} style={{ width: 20, height: 20 }} />
+          </View>
+          {/* Options icon */}
+          <View style={[styles.justify_items_center, { backgroundColor: colors.tabBarColor, borderRadius: 7, width: 42, height: 'auto' }]}>
+            <Image source={require('@/assets/options-icon.png')} resizeMode='cover' style={{ width: 40, height: 40 }} />
           </View>
         </View>
-        <Image source={require('@/assets/diamond-image.png')} style={{ width: 65, height: 27, }} />
-      </View>
 
-      {/* Hero banner */}
-      <View style={[styles.justify_items_center, { paddingVertical: 10 }]}>
-        <Image source={require('@/assets/hero-image.png')} resizeMode='cover' style={{ width: '100%', height: 139, borderRadius: 7, marginVertical: 10 }} />
-      </View>
-
-      {/* Search bar container */}
-      <View style={[styles.justify_between, { columnGap: 20 }]}>
-        {/* Search bar */}
-        <View style={[styles.items_center, styles.justify_between, { width: 'auto', flex: 1, paddingVertical: 2, paddingHorizontal: 7, backgroundColor: tabBarColor, borderRadius: 7 }]}>
-          <TextInput
-            style={{ color: '#E8E8E8' }}
-            placeholder='Search'
-            placeholderTextColor='#e8e8e898'
-            value={inputValue}
-            onChangeText={handleTextChange}
-          />
-          <Image source={require('@/assets/search-icon.png')} style={{ width: 20, height: 20 }} />
+        {/* Categories */}
+        <View style={{ paddingVertical: 10, paddingHorizontal: 2 }}>
+          <Text style={[styles.text_Kufam_Reg, styles.text_primary, { fontSize: 14, height: 20 }]}>Categories</Text>
+          <View style={[styles.items_center, styles.justify_between]}>
+            {categories.map((category, idx) => {
+              return (
+                <TouchableOpacity
+                  key={idx}
+                  onPress={() => handleCategoryClick(category)}
+                  style={[styles.items_center, { flexDirection: 'column' }]}>
+                  <View style={[styles.justify_items_center, { backgroundColor: colors.tabBarColor, width: 60, height: 42, marginVertical: 10, borderRadius: 5 }]}>
+                    <Image source={category.image} />
+                  </View>
+                  <Text style={[styles.text_Kufam_Reg, styles.text_secondary, { fontSize: 10, wordWrap: 'nowrap' }]}>{category.name.toLocaleUpperCase()}</Text>
+                </TouchableOpacity>
+              )
+            })}
+          </View>
         </View>
-        {/* Options icon */}
-        <View style={[styles.justify_items_center, { backgroundColor: tabBarColor, borderRadius: 7, width: 42, height: 'auto' }]}>
-          <Image source={require('@/assets/options-icon.png')} resizeMode='cover' style={{ width: 40, height: 40 }} />
-        </View>
-      </View>
 
-      {/* Categories */}
-      <View style={{ paddingVertical: 10, paddingHorizontal: 2 }}>
-        <Text style={[styles.text_Kufam_Reg, styles.text_primary, { fontSize: 14, height: 20 }]}>Categories</Text>
-        <View style={[styles.items_center, styles.justify_between]}>
-          {categories.map((category, idx) => {
-            return (
-              <TouchableOpacity
-                key={idx}
-                onPress={() => handleCategoryClick(category)}
-                style={[styles.items_center, { flexDirection: 'column' }]}>
-                <View style={[styles.justify_items_center, { backgroundColor: tabBarColor, width: 60, height: 42, marginVertical: 10, borderRadius: 5 }]}>
-                  <Image source={category.image} />
-                </View>
-                <Text style={[styles.text_Kufam_Reg, styles.text_secondary, { fontSize: 10, wordWrap: 'nowrap' }]}>{category.name.toLocaleUpperCase()}</Text>
-              </TouchableOpacity>
-            )
-          })}
-        </View>
-      </View>
-
-      {/* Recent Activity */}
-      <View style={[{ marginBottom: 50 }]}>
-        <Text style={[styles.text_Kufam_Reg, styles.text_primary, { fontSize: 14, height: 20 }]}>Recent Activity</Text>
-        <View style={[styles.flex, { gap: 20, paddingVertical: 20 }]}>
-          {recentActivity.map((activity, idx) => {
-            return (
-              <Shadow key={idx}
-                distance={8}
-                startColor="rgba(255, 255, 255, 0.10)"   // subtle white glow
-                endColor="rgba(255, 255, 255, 0)"       // smooth fade
-                offset={[0, 4]}
-                paintInside={false}
-              >
-                <View key={idx} style={[styles.justify_between, styles.items_center, { width: '100%', paddingTop: 6, paddingHorizontal: 20, borderRadius: 4, }]}>
-                  {/* Activity name */}
-                  <View style={[styles.justify_items_center, { columnGap: 10 }]}>
-                    <View style={[styles.justify_items_center, { backgroundColor: tabBarColor, width: 60, height: 42, borderRadius: 5 }]}>
-                      <Image source={activity.image} />
+        {/* Recent Activity */}
+        <View style={[{ marginBottom: 50 }]}>
+          <Text style={[styles.text_Kufam_Reg, styles.text_primary, { fontSize: 14, height: 20 }]}>Recent Activity</Text>
+          <View style={[styles.flex, { gap: 20, paddingVertical: 20 }]}>
+            {recentActivity.map((activity, idx) => {
+              return (
+                <Shadow key={idx}
+                  distance={8}
+                  startColor="rgba(255, 255, 255, 0.10)"   // subtle white glow
+                  endColor="rgba(255, 255, 255, 0)"       // smooth fade
+                  offset={[0, 4]}
+                  paintInside={false}
+                >
+                  <View key={idx} style={[styles.justify_between, styles.items_center, { width: '100%', paddingTop: 6, paddingHorizontal: 20, borderRadius: 4, }]}>
+                    {/* Activity name */}
+                    <View style={[styles.justify_items_center, { columnGap: 10 }]}>
+                      <View style={[styles.justify_items_center, { backgroundColor: colors.tabBarColor, width: 60, height: 42, borderRadius: 5 }]}>
+                        <Image source={activity.image} />
+                      </View>
+                      <View style={[{}]}>
+                        <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, height: 18, marginTop: 6, fontSize: 13 }]}>{activity.name}</Text>
+                        <Text style={[styles.text_Kufam_Reg, { color: colors.textSecondary, marginTop: 0, fontSize: 10 }]}>{activity.totalQuestions} Questions</Text>
+                      </View>
                     </View>
-                    <View style={[{}]}>
-                      <Text style={[styles.text_Kufam_Reg, { color: textPrimary, height: 18, marginTop: 6, fontSize: 13 }]}>{activity.name}</Text>
-                      <Text style={[styles.text_Kufam_Reg, { color: textSecondary, marginTop: 0, fontSize: 10 }]}>{activity.totalQuestions} Questions</Text>
+
+                    {/* Activity percentage */}
+                    <View style={[styles.justify_items_center, { backgroundColor: activity.bgcolor, height: 45, width: 45, borderWidth: 2.5, borderColor: activity.color, borderRadius: 50 }]}>
+                      <Text style={[styles.text_Kufam_Reg, { color: 'black', height: 14, fontSize: 10 }]}>{activity.attemptedQuestions}/{activity.totalQuestions}</Text>
                     </View>
                   </View>
-
-                  {/* Activity percentage */}
-                  <View style={[styles.justify_items_center, { backgroundColor: activity.bgcolor, height: 45, width: 45, borderWidth: 2.5, borderColor: activity.color, borderRadius: 50 }]}>
-                    <Text style={[styles.text_Kufam_Reg, { color: 'black', height: 14, fontSize: 10 }]}>{activity.attemptedQuestions}/{activity.totalQuestions}</Text>
-                  </View>
-                </View>
-              </Shadow>
-            )
-          })}
+                </Shadow>
+              )
+            })}
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   )
 }
 
@@ -258,7 +248,7 @@ const styles = StyleSheet.create({
   justify_between: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
   items_center: { display: 'flex', flexDirection: 'row', alignItems: 'center' },
   justify_items_center: { display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-  text_primary: { color: textPrimary },
-  text_secondary: { color: textSecondary },
+  text_primary: { color: colors.textPrimary },
+  text_secondary: { color: colors.textSecondary },
   text_Kufam_Reg: { height: 30, fontFamily: 'Kufam_400Regular' }
 })

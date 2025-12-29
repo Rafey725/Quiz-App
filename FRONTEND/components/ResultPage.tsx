@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { textPrimary, textSecondary } from '@/constants/colors'
-import { Shadow } from 'react-native-shadow-2'
+import colors from '@/constants/colors'
 import { useRouter } from 'expo-router'
 import { useSelector } from 'react-redux'
 
@@ -13,8 +12,8 @@ const ResultPage = ({ changePage, totalQuestions, score }: any) => {
         <View style={[styles.main,]}>
             <View style={[styles.justify_items_center, { flexDirection: 'column', rowGap: 10, flex: 1 }]}>
                 <View style={[styles.justify_items_center, { flexDirection: 'column', backgroundColor: '#17233fff', width: 178, height: 178, borderRadius: 100, borderWidth: 10, borderColor: 'rgba(56, 81, 139, 0.37)' }]}>
-                    <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 22, height: 29 }]}>Your Score</Text>
-                    <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 32, height: 40 }]}>{score}/{totalQuestions}</Text>
+                    <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 22, height: 29 }]}>Your Score</Text>
+                    <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 32, height: 40 }]}>{score}/{totalQuestions}</Text>
                 </View>
 
                 <View style={[styles.justify_items_center, { flexDirection: 'column', }]}>
@@ -30,7 +29,7 @@ const ResultPage = ({ changePage, totalQuestions, score }: any) => {
                         <View
                             style={[styles.justify_items_center, { backgroundColor: '#17233fff', width: '100%', height: 54, borderRadius: 6, marginTop: 4 }]}
                         >
-                            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, marginBottom: 7 }]}>Share</Text>
+                            <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 20, marginBottom: 7 }]}>Share</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -46,7 +45,7 @@ const ResultPage = ({ changePage, totalQuestions, score }: any) => {
                         <View
                             style={[styles.justify_items_center, { backgroundColor: '#17233fff', width: '100%', height: 54, borderRadius: 6, marginTop: 4 }]}
                         >
-                            <Text style={[styles.text_Kufam_Reg, { color: textPrimary, fontSize: 20, marginBottom: 7 }]}>Back to Home</Text>
+                            <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 20, marginBottom: 7 }]}>Back to Home</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     justify_between: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
     items_center: { display: 'flex', flexDirection: 'row', alignItems: 'center' },
     justify_items_center: { display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-    text_primary: { color: textPrimary },
-    text_secondary: { color: textSecondary },
+    text_primary: { color: colors.textPrimary },
+    text_secondary: { color: colors.textSecondary },
     text_Kufam_Reg: { height: 28, fontFamily: 'Kufam_400Regular' }
 })

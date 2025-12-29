@@ -1,15 +1,16 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useEffect } from 'react'
-import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
+import colors from '@/constants/colors'
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
-import { API_URL } from '@/config/api'
+import API_URL from '@/config/api'
 import * as SecureStore from 'expo-secure-store'
 import { setAuthStateTrue } from '@/Redux/authStateSlice'
 import { useDispatch } from 'react-redux'
 import FullScreenLoader from './FullScreenLoader'
 import { turnOffLoading } from '@/Redux/loadingSlice'
+import { usePostQuery } from '@/hooks/usePostQuery'
 
 const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
 
     type LoginForm = {
         email: string,
-        password: string
+        pass: string
     }
 
     const inputFields = [
@@ -30,7 +31,7 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
             text_type: 'emailAddress' as const,
         },
         {
-            name: 'password' as const,
+            name: 'pass' as const,
             placeholder: 'Enter password',
             type: 'default' as const,
             text_type: 'password' as const,
@@ -46,32 +47,17 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const { control, handleSubmit } = useForm<LoginForm>({
         defaultValues: {
             email: '',
-            password: ''
+            pass: ''
         }
     })
 
-    const login = async ({ email, password }: LoginForm) => {
-        let res = await fetch(`${API_URL}/auth/login`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                pass: password
-            })
-        })
-        return res
-    }
-
-    const loginMutation = useMutation({
-        mutationFn: login
-    })
+    const loginMutation = usePostQuery('auth/login')
 
     const onSubmit = async (data: LoginForm) => {
         setLoading(true)
         try {
             setError('')
+            if (!loginMutation?.mutateAsync) return
             const res = await loginMutation.mutateAsync(data)
             let result = await res.json()
             if (!res.ok) {
@@ -89,7 +75,7 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
 
     return (
         <>
-            <FullScreenLoader visible={false} />
+            <FullScreenLoader visible={loading} />
             <View style={[styles.main]}>
                 <View style={[styles.justify_items_center, { width: '100%', flexDirection: 'column', backgroundColor: '#0E1328', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 20 }]}>
                     <Text style={[styles.text_Kufam_Reg, { color: '#FFFF', fontSize: 36, fontWeight: 'bold' }]}>Login</Text>
@@ -107,15 +93,15 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
                                             placeholder={f.placeholder}
                                             keyboardType={f.type}
                                             textContentType={f.text_type}
-                                            secureTextEntry={f.name === "password" ? hidden : false}
+                                            secureTextEntry={f.name === "pass" ? hidden : false}
                                             autoCapitalize="none"
                                             autoCorrect={false}
-                                            placeholderTextColor={textSecondary}
+                                            placeholderTextColor={colors.textSecondary}
                                             style={styles.input}
                                         />
                                     )}
                                 />
-                                {f.name === 'password' &&
+                                {f.name === 'pass' &&
                                     <Pressable onPress={() => setHidden(prev => !prev)}>
                                         <Text style={{ color: 'white' }}>{hidden ? "Show" : "Hide"}</Text>
                                     </Pressable>
@@ -137,7 +123,7 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
                     </View>
 
                     <View style={[{ display: 'flex', flexDirection: 'row', marginTop: 20 }]}>
-                        <Text style={[{ color: textSecondary }]}>Not have an accont? </Text>
+                        <Text style={[{ color: colors.textSecondary }]}>Not have an accont? </Text>
                         <Pressable onPress={() => changePage('signup')}>
                             <Text style={[{ color: '#4F6BFF' }]}>Create new account</Text>
                         </Pressable>
@@ -166,8 +152,8 @@ const styles = StyleSheet.create({
     justify_between: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
     items_center: { display: 'flex', flexDirection: 'row', alignItems: 'center' },
     justify_items_center: { display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-    text_primary: { color: textPrimary },
-    text_secondary: { color: textSecondary },
+    text_primary: { color: colors.textPrimary },
+    text_secondary: { color: colors.textSecondary },
     text_Kufam_Reg: {
         height: 50, fontFamily: 'Kufam_400Regular'
     },
@@ -184,7 +170,7 @@ const styles = StyleSheet.create({
         alignItems: "center", // important
     },
     input: {
-        color: textPrimary,
+        color: colors.textPrimary,
         fontSize: 18,
         height: "100%",
         flex: 1,

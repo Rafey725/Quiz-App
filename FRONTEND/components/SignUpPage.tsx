@@ -1,25 +1,27 @@
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { tabBarColor, textPrimary, textSecondary } from '@/constants/colors'
+import colors from '@/constants/colors'
 import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { API_URL } from '@/config/api'
+import API_URL from '@/config/api'
 import { useMutation } from '@tanstack/react-query'
+import { usePostQuery } from '@/hooks/usePostQuery'
 
 const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const [hidden, setHidden] = useState<boolean>(true)
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
 
     type SignupForm = {
-        fullName: string,
+        username: string,
         email: string,
-        password: string,
+        pass: string,
         confirmPassword: string
     }
 
     const inputFields = [
         {
-            name: 'fullName' as const,
+            name: 'username' as const,
             placeholder: 'Enter full name',
             type: 'default' as const,
             text_type: 'name' as const,
@@ -31,7 +33,7 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
             text_type: 'emailAddress' as const,
         },
         {
-            name: 'password' as const,
+            name: 'pass' as const,
             placeholder: 'Enter password',
             type: 'default' as const,
             text_type: 'password' as const,
@@ -46,112 +48,100 @@ const SignUpPage = ({ changePage }: { changePage: (page: string) => void }) => {
 
     const { control, handleSubmit } = useForm<SignupForm>({
         defaultValues: {
-            fullName: '',
+            username: '',
             email: '',
-            password: '',
+            pass: '',
             confirmPassword: ''
         }
     })
 
-    // Sign up function
-    const signup = async ({ fullName, email, password }: SignupForm) => {
-        let res = await fetch(`${API_URL}/auth/signup`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: fullName,
-                email: email,
-                pass: password
-            })
-        })
-        // if (!res.ok) throw new Error("Signup failed");
-
-        let data = await res.json()
-        return data
-
-    }
-
-    // Sign up query
-    const signupMutation = useMutation({
-        mutationFn: signup
-    })
+    const signupMutation = usePostQuery('auth/signup')
 
     const onSubmit = async (data: SignupForm) => {
-        // Pass validation
-        if (!(data.password === data.confirmPassword)) {
-            setError('Password is incorrect')
-            return
-        } else { setError('') }
-        // Fetching
-        let res = await signupMutation.mutateAsync(data)
-        // Error checking
-        if (res.message.endsWith('exists')) {
-            return setError('Email already exists')
-        } else if (res.message === 'Invalid info') {
-            return setError('Invalid info')
+        setLoading(true)
+        try {
+            // Pass validation
+            if (!(data.pass === data.confirmPassword)) {
+                setError('Password is incorrect')
+                return
+            } else { setError('') }
+            // Fetching
+            if (!signupMutation?.mutateAsync) return
+            let res = await signupMutation.mutateAsync(data)
+            let result = await res.json()
+            console.log(result.message);
+            // Error checking
+            if (result.message.endsWith('exists')) {
+                return setError('Email already exists')
+            } else if (result.message === 'Invalid info') {
+                return setError('Invalid info')
+            }
+            changePage('login')
+        } catch (err) {
+            console.log('Network Error: ', err);
+        } finally {
+            setLoading(false)
         }
-        changePage('login')
-        console.log(res.message);
     }
 
     return (
-        <View style={[styles.main]}>
-            <View style={[styles.justify_items_center, { width: '100%', flexDirection: 'column', backgroundColor: '#0E1328', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 20 }]}>
-                <Text style={[styles.text_Kufam_Reg, { color: '#FFFF', fontSize: 36, fontWeight: 'bold' }]}>Sign up</Text>
+        <>
+            <View style={[styles.main]}>
+                <View style={[styles.justify_items_center, { width: '100%', flexDirection: 'column', backgroundColor: '#0E1328', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 20 }]}>
+                    <Text style={[styles.text_Kufam_Reg, { color: '#FFFF', fontSize: 36, fontWeight: 'bold' }]}>Sign up</Text>
 
-                <View style={{ width: '100%', marginTop: 20 }}>
-                    {inputFields.map((f) => (
-                        <View key={f.name} style={styles.inputWrap}>
-                            <Controller
-                                control={control}
-                                name={f.name}
-                                render={({ field }) => (
-                                    <TextInput
-                                        value={field.value}
-                                        onChangeText={field.onChange}
-                                        placeholder={f.placeholder}
-                                        keyboardType={f.type}
-                                        textContentType={f.text_type}
-                                        secureTextEntry={(f.name === "password" || f.name === 'confirmPassword') ? hidden : false}
-                                        autoCapitalize="none"
-                                        autoCorrect={false}
-                                        placeholderTextColor={textSecondary}
-                                        style={styles.input}
-                                    />
-                                )}
-                            />
-                            {(f.name === 'password' || f.name === 'confirmPassword') &&
-                                <TouchableOpacity onPress={() => setHidden(prev => !prev)}>
-                                    <Text style={{ color: 'white' }}>{hidden ? "Show" : "Hide"}</Text>
-                                </TouchableOpacity>
-                            }
-                        </View>
-                    ))}
+                    <View style={{ width: '100%', marginTop: 20 }}>
+                        {inputFields.map((f) => (
+                            <View key={f.name} style={styles.inputWrap}>
+                                <Controller
+                                    control={control}
+                                    name={f.name}
+                                    render={({ field }) => (
+                                        <TextInput
+                                            value={field.value}
+                                            onChangeText={field.onChange}
+                                            placeholder={f.placeholder}
+                                            keyboardType={f.type}
+                                            textContentType={f.text_type}
+                                            secureTextEntry={(f.name === "pass" || f.name === 'confirmPassword') ? hidden : false}
+                                            autoCapitalize="none"
+                                            autoCorrect={false}
+                                            placeholderTextColor={colors.textSecondary}
+                                            style={styles.input}
+                                        />
+                                    )}
+                                />
+                                {(f.name === 'pass' || f.name === 'confirmPassword') &&
+                                    <TouchableOpacity onPress={() => setHidden(prev => !prev)}>
+                                        <Text style={{ color: 'white' }}>{hidden ? "Show" : "Hide"}</Text>
+                                    </TouchableOpacity>
+                                }
+                            </View>
+                        ))}
 
-                    {error && <View style={styles.errorWrapper}>
-                        <Text style={styles.errorText}>
-                            {error}
-                        </Text>
-                    </View>}
+                        {error && <View style={styles.errorWrapper}>
+                            <Text style={styles.errorText}>
+                                {error}
+                            </Text>
+                        </View>}
 
 
-                    <TouchableOpacity onPress={handleSubmit(onSubmit)} style={[styles.submitBtn]}>
-                        <Text style={[styles.text_secondary, { fontSize: 20, fontWeight: 'semibold' }]}>
-                            Sign up
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={[styles.submitBtn]}>
+                            <Text style={[styles.text_secondary, { fontSize: 20, fontWeight: 'semibold' }]}>
+                                Sign up
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
-                <View style={[{ display: 'flex', flexDirection: 'row', marginTop: 20 }]}>
-                    <Text style={[{ color: textSecondary }]}>Already have an accont? </Text>
-                    <Pressable onPress={() => changePage('login')}>
-                        <Text style={[{ color: '#4F6BFF' }]}>Login</Text>
-                    </Pressable>
+                    <View style={[{ display: 'flex', flexDirection: 'row', marginTop: 20 }]}>
+                        <Text style={[{ color: colors.textSecondary }]}>Already have an accont? </Text>
+                        <Pressable onPress={() => changePage('login')}>
+                            <Text style={[{ color: '#4F6BFF' }]}>Login</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
-        </View >
+        </>
     )
 }
 
@@ -173,8 +163,8 @@ const styles = StyleSheet.create({
     justify_between: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between' },
     items_center: { display: 'flex', flexDirection: 'row', alignItems: 'center' },
     justify_items_center: { display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-    text_primary: { color: textPrimary },
-    text_secondary: { color: textSecondary },
+    text_primary: { color: colors.textPrimary },
+    text_secondary: { color: colors.textSecondary },
     text_Kufam_Reg: {
         height: 50, fontFamily: 'Kufam_400Regular'
     },
@@ -191,7 +181,7 @@ const styles = StyleSheet.create({
         alignItems: "center", // important
     },
     input: {
-        color: textPrimary,
+        color: colors.textPrimary,
         fontSize: 18,
         height: "100%",
         flex: 1,
