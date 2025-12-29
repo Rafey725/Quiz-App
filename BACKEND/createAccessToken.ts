@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import dotenv from 'dotenv'
 
 type payloadType = {
     userId: number,
@@ -9,6 +8,6 @@ type payloadType = {
 export const createAccessToken = (payload: payloadType) => {
     const secret = process.env.JWT_SECRET
     if (!secret) throw new Error("JWT_SECRET is missing");
-
-    return jwt.sign(payload, secret, { expiresIn: '3m' })
+    
+    return jwt.sign(payload, secret, { expiresIn: '5m' })
 }

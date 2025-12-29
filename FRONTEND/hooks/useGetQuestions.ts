@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import API_URL from "@/config/api"
+import { useDispatch } from "react-redux"
+import { setToken } from "@/Redux/tokenSlice"
+import { useRouter } from "expo-router"
 
 type QuizQuestion = {
   id: string | number
@@ -26,28 +29,33 @@ export const useGetQuestions = ({
   setTotalQuestions
 }: UseGetQuestionsParams) => {
 
+  const dispatch = useDispatch()
+  const router = useRouter()
+
   return useQuery<QuizQuestion[]>({
     queryKey: ["questions", category, attemptId],
     queryFn: async () => {
-            try {
-                const res = await fetch(`${API_URL}/${endpoint}`, {
-                    method: 'GET',
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+      try {
+        const res = await fetch(`${API_URL}/${endpoint}`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        })
 
-                if (!res.ok) throw new Error('Failed to load questions')
-                const data = await res.json()
-                setTotalQuestions?.(data.length)
-                return data
-            } catch (err) {
-                console.log('Something is wrong: ', err);
-                throw err
-            }
-        },
+        if (res.status === 401) throw new Error('Failed to load questions')
+        const data = await res.json()
+        setTotalQuestions?.(data.length)
+        return data
+      } catch (err) {
+        console.log('Something is wrong: ', err);
+        // dispatch(setToken(null))
+        throw err
+      }
+    },
     enabled: !!category && !!token,
+    retry: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 60_000

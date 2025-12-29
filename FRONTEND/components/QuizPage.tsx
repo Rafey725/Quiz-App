@@ -46,13 +46,19 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     }
 
     // Fetching questions 
-    const { data: questions, isPending } = useGetQuestions({ 
-        endpoint: `questions/${category}`, 
-        category:category,
-        token:token,
-        setTotalQuestions:setTotalQuestions,
-        attemptId:attemptId
-     })
+    const { data: questions, isPending, isError, isFetching } = useGetQuestions({
+        endpoint: `questions/${category}`,
+        category: category,
+        token: token,
+        setTotalQuestions: setTotalQuestions,
+        attemptId: attemptId
+    })
+
+    useEffect(() => {
+        if (isError) {
+            router.replace('/(auth)')
+        }
+    }, [isError])
 
 
     // Setting options
@@ -88,12 +94,11 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
         router.push("/(tabs)")
         dispatch(setQuestionNumZero())
         dispatch(resetScore())
-        dispatch(turnOnLoading())
     }
 
     return (
         <>
-            <FullScreenLoader visible={isPending} />
+            <FullScreenLoader visible={isPending && isFetching} />
             <ScrollView style={[styles.main,]}>
                 {/* Header */}
                 <View style={[styles.items_center, {}]}>

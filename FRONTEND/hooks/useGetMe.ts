@@ -1,7 +1,10 @@
 import API_URL from "@/config/api";
+import { setToken } from "@/Redux/tokenSlice";
 import { setUserInfo } from "@/Redux/userInfoSlice";
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
+import * as SecureStore from 'expo-secure-store'
+import { jwtDecode } from "jwt-decode";
 
 type UserGetMeParams = {
     endpoint: string,
@@ -29,10 +32,10 @@ export const useGetMe = ({
                 return data
             } catch (err) {
                 console.log('Getting user info error: ', err);
+                dispatch(setToken(null))
                 dispatch(setUserInfo(null))
-
             }
         },
-        enabled: !!token
+        enabled: true
     })
 }

@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import FullScreenLoader from './FullScreenLoader'
 import { turnOffLoading } from '@/Redux/loadingSlice'
 import { usePostQuery } from '@/hooks/usePostQuery'
+import { setUserInfo } from '@/Redux/userInfoSlice'
 
 const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
     const dispatch = useDispatch()
@@ -65,6 +66,7 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
             }
             console.log(result.message);
             await SecureStore.setItemAsync('token', result.token)
+            // dispatch(setUserInfo(result.data))
             dispatch(setAuthStateTrue())
         } catch (err) {
             console.log("Network error: ", err);

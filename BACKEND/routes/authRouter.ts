@@ -20,7 +20,7 @@ interface authRequest extends Request {
 
 router.get('/me', requireAuth, async (req: authRequest, res: Response) => {
     let data = req.user
-    if (!data) return res.status(401).json({message:'Unauthorized'})
+    if (!data) return res.status(401).json({ message: 'Unauthorized' })
     let findUser = await db
         .select()
         .from(users)
@@ -62,7 +62,12 @@ router.post('/login', async (req, res) => {
     // Return token
     const token = createAccessToken({ userId: findUser[0].id, email: findUser[0].email })
 
-    res.json({ message: 'User found', token: token })
+    const userInfo = {
+        username: findUser[0].username,
+        id: findUser[0].id
+    }
+
+    res.json({ message: 'User found', token: token, data: { userInfo } })
 })
 
 export default router

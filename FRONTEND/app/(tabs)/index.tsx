@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import colors from '@/constants/colors'
 import { useFonts, Kufam_400Regular, Kufam_700Bold } from '@expo-google-fonts/kufam';
@@ -9,15 +9,13 @@ import { changeCategory } from '@/Redux/categorySlice';
 import { setQuestionNumZero } from '@/Redux/questionNumSlice'
 import { newAttempt } from '@/Redux/quizAttemptSlice';
 import { resetScore } from '@/Redux/scoreSlice';
-import { useQuery } from '@tanstack/react-query';
-import API_URL from '@/config/api';
 import * as SecureStore from 'expo-secure-store'
 import { setToken } from '@/Redux/tokenSlice';
-import { setUserInfo } from '@/Redux/userInfoSlice';
 import { turnOnLoading } from '@/Redux/loadingSlice';
 import { useFocusEffect } from '@react-navigation/native';
 import { useGetMe } from '@/hooks/useGetMe';
 import FullScreenLoader from '@/components/FullScreenLoader';
+import { jwtDecode } from 'jwt-decode'
 
 const Home = () => {
   // Applying Kufam font... 
@@ -37,7 +35,6 @@ const Home = () => {
   };
 
   let router = useRouter()
-  let disptach = useDispatch()
 
   const [inputValue, setInputValue] = useState('')
   function handleTextChange(text: any) {
@@ -96,8 +93,9 @@ const Home = () => {
   ]
 
   const dispatch = useDispatch()
-  const userInfo = useSelector((state: any) => state.userInfoState.userInfo)
+  // const userInfo = useSelector((state: any) => state.userInfoState.userInfo)
   const token = useSelector((state: any) => state.tokenState.token)
+  const loading = useSelector((state: any) => state.loadingState.loading)
 
   useFocusEffect(
     useCallback(() => {
@@ -106,7 +104,19 @@ const Home = () => {
       (async () => {
         try {
           const token = await SecureStore.getItemAsync('token')
-          if (isActive) disptach(setToken(token))
+          if (!token) return
+          const currentTime = Date.now()
+
+          const decoded = jwtDecode(token)
+          const expirationTime = decoded.exp
+          if (!expirationTime) return
+
+          if (currentTime >= (expirationTime * 1000)) {
+            dispatch(setToken(null))
+            await SecureStore.deleteItemAsync('token')
+          } else {
+            dispatch(setToken(token))
+          }
         } catch (err) {
           console.log('Loading the token, Error: ', err)
         }
@@ -117,15 +127,15 @@ const Home = () => {
   )
 
   // Fetching user data
-  const { data, isPending } = useGetMe({ endpoint: 'auth/me', token: token })
+  const { data: userInfo, isPending, isFetching } = useGetMe({ endpoint: 'auth/me', token: token })
 
   // Handle click on cateory
-  const handleCategoryClick = (category: any) => {
-    if (!!userInfo?.username) {
-      disptach(changeCategory(category.name.toLocaleLowerCase()))
-      disptach(setQuestionNumZero())
-      disptach(newAttempt())
-      disptach(resetScore())
+  const handleCategoryClick = async (category: any) => {
+    if (token) {
+      dispatch(changeCategory(category.name.toLocaleLowerCase()))
+      dispatch(setQuestionNumZero())
+      dispatch(newAttempt())
+      dispatch(resetScore())
       router.push('/questions')
     } else {
       dispatch(turnOnLoading())
@@ -135,15 +145,22 @@ const Home = () => {
 
   return (
     <>
-      <FullScreenLoader visible={isPending} />
+      <FullScreenLoader visible={loading} />
       <ScrollView style={styles.main}>
         {/* Profile header */}
         <View style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <View style={{ display: 'flex', columnGap: 5, flexDirection: 'row', alignItems: 'center' }}>
             <Image source={require('@/assets/profile-avatar.png')} style={{ width: 50, height: 50, borderRadius: 50 }} />
             <View>
-              <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo.username ? userInfo.username : 'Aamir'}</Text>
-              <Text style={[styles.text_Kufam_Reg, { color: colors.textSecondary }]}>ID-{userInfo.id ? userInfo.id : '1809'}</Text>
+              {(userInfo?.username && userInfo?.id) ?
+                <>
+                  <Text style={[styles.text_Kufam_Reg, { color: colors.textPrimary, fontSize: 20, opacity: 0.8 }]}>{userInfo?.username}</Text>
+                  <Text style={[styles.text_Kufam_Reg, { color: colors.textSecondary }]}>{userInfo.id ? `ID-${userInfo.id}` : null}</Text>
+                </>
+                : !userInfo
+                  ? <ActivityIndicator size={'small'} />
+                  : null
+              }
             </View>
           </View>
           <Image source={require('@/assets/diamond-image.png')} style={{ width: 65, height: 27, }} />
