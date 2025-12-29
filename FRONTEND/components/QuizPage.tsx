@@ -22,7 +22,7 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     const [options, setOptions] = useState<string[]>([])
     const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>()
     const [selectedOptionText, setSelectedOptionText] = useState<string>('')
-    const [token, setToken] = useState<string | null>(null)
+    const token = useSelector((state: any) => state.tokenState.token)
     const [openLoginForm, setOpenLoginForm] = useState(false)
 
     // Shuffling the options
@@ -45,19 +45,6 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
         // console.log(arr)
         setOptions(arr)
     }
-
-    // Load token once
-    useEffect(() => {
-        (async () => {
-            try {
-                const token = await SecureStore.getItemAsync('token')
-                setToken(token)
-                console.log(token)
-            } catch (err) {
-                console.log('Loding the token, Error: ', err)
-            }
-        })()
-    }, [])
 
     // Tanstack Query Method for fetching questions
     const { data: questions = [], isPending, isFetching, error } = useQuery({
@@ -91,7 +78,10 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     // Setting options
     useEffect(() => {
         if (questions.length === 0 || questions === undefined) return
-        let allOptions = [questions[questionNum].correct_answer, ...questions[questionNum].incorrect_answers]
+        let allOptions = [
+            questions[questionNum].correct_answer,
+            ...questions[questionNum].incorrect_answers
+        ]
         shuffleOptions(allOptions)
     }, [questionNum, questions])
 
@@ -106,7 +96,6 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
             dispatch(increamentScore())
         }
     }
-    // console.log('Score:', score);
 
     const finishQuiz = () => {
         setSelectedOptionIdx(null)

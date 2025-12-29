@@ -18,15 +18,13 @@ interface authRequest extends Request {
     }
 }
 
-
 router.get('/me', requireAuth, async (req: authRequest, res: Response) => {
     let data = req.user
-    if (!data) return
+    if (!data) return res.status(401).json({message:'Unauthorized'})
     let findUser = await db
         .select()
         .from(users)
         .where(eq(users.email, data.email))
-    console.log(findUser);
 
     res.json({ message: 'User info is sent', username: findUser[0].username, id: findUser[0].id })
 })
@@ -45,7 +43,6 @@ router.post('/signup', validataInfo, async (req, res) => {
         email: req.body.email,
         password_hash: password_hash
     })
-    console.log('inserted');
 
     res.json({ message: 'Registered new user' })
 })

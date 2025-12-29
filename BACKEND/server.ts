@@ -1,3 +1,4 @@
+import dotenv from 'dotenv/config'
 import express from 'express'
 import { db } from './db.ts'
 import { questions } from "./schemas/questionSchema.ts"
@@ -11,21 +12,25 @@ app.use(express.json())
 
 app.use('/auth', authRouter)
 
-app.get(`/questions/:id`, requireAuth, async (req, res) => {
-    let category = req.params.id
-    let fetchedQuestions = await db
-        .select()
-        .from(questions)
-        .where(eq(questions.category, category))
-        .orderBy(sql`RANDOM()`)
-        .limit(10)
+app.get(`/questions/:category`, requireAuth, async (req, res) => {
+    try {
+        let category = req.params.category
+        let fetchedQuestions = await db
+            .select()
+            .from(questions)
+            .where(eq(questions.category, category))
+            .orderBy(sql`RANDOM()`)
+            .limit(10)
 
-    res.json(fetchedQuestions)
+        res.json(fetchedQuestions)
+    } catch (err) {
+        res.json({ message: 'Network Error: Someting is wrong' })
+    }
 })
 
 async function startServer() {
     app.listen(port, () => {
-        console.log(`🚀 Server running on http://localhost:${port}`);
+        console.log(`🚀 Server is running on http://localhost:${port}`);
     })
 }
 startServer()

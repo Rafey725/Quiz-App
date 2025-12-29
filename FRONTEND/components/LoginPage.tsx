@@ -79,8 +79,6 @@ const LoginPage = ({ changePage }: { changePage: (page: string) => void }) => {
             }
             console.log(result.message);
             await SecureStore.setItemAsync('token', result.token)
-            const saved = await SecureStore.getItemAsync('token')
-            console.log('SAVED TOKEN: ', saved);
             dispatch(setAuthStateTrue())
         } catch (err) {
             console.log("Network error: ", err);

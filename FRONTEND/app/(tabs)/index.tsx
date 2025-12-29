@@ -97,19 +97,6 @@ const Home = () => {
   const dispatch = useDispatch()
   const userInfo = useSelector((state: any) => state.userInfoState.userInfo)
   const token = useSelector((state: any) => state.tokenState.token)
-  const authState = useSelector((state: any) => state.authState.authState)
-  const [loginPreview, setLoginPreview] = useState(false)
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const token = await SecureStore.getItemAsync('token')
-  //       disptach(setToken(token))
-  //     } catch (err) {
-  //       console.log('Loading the token, Error: ', err)
-  //     }
-  //   })()
-  // }, [authState])
 
   useFocusEffect(
     useCallback(() => {
