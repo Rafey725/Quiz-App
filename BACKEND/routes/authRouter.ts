@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import { Router } from 'express'
 import { validataInfo } from "../middlewares/validateInfo.ts";
 import { db } from "../db.ts";
@@ -8,8 +8,21 @@ import bcrypt from 'bcrypt'
 import Jwt from 'jsonwebtoken'
 import { createAccessToken } from "../createAccessToken.ts";
 import { requireAuth } from "../middlewares/requireAuth.ts";
+import { rateLimit } from 'express-rate-limit'
+import concurrencyLimit from "../serviceFunctions/concurrencyLimit.ts";
 
 const router = Router()
+
+const loginRateLimit = rateLimit({
+    windowMs: 60_000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: 'Too many login attempts. Try again later.'
+})
+
+
+const loginConcurrencyLimit = concurrencyLimit(10)
 
 interface authRequest extends Request {
     user?: {
@@ -47,7 +60,7 @@ router.post('/signup', validataInfo, async (req, res) => {
     res.json({ message: 'Registered new user' })
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', loginRateLimit, loginConcurrencyLimit, async (req, res) => {
     // Finding email
     let findUser = await db
         .select()
