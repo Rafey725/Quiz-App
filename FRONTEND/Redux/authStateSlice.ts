@@ -4,7 +4,7 @@ import { router } from 'expo-router'
 const authStateSlice = createSlice({
     name: 'authState',
     initialState: {
-        authState: true,
+        authState: false,
     },
     reducers: {
         setAuthStateTrue: (state) => {

@@ -3,8 +3,6 @@ import { setToken } from "@/Redux/tokenSlice";
 import { setUserInfo } from "@/Redux/userInfoSlice";
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
-import * as SecureStore from 'expo-secure-store'
-import { jwtDecode } from "jwt-decode";
 
 type UserGetMeParams = {
     endpoint: string,

@@ -2,15 +2,11 @@ import { ScrollView, Image, StyleSheet, Text, View, Pressable, TouchableOpacity 
 import React, { useEffect, useState } from 'react'
 import colors from '@/constants/colors'
 import { Shadow } from 'react-native-shadow-2'
-import API_URL from "@/config/api"
 import { useRouter } from 'expo-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { increamentQuestionNum, setQuestionNumZero } from '@/Redux/questionNumSlice'
 import { increamentScore, resetScore } from '@/Redux/scoreSlice'
 import FullScreenLoader from './FullScreenLoader'
-import { turnOnLoading } from '@/Redux/loadingSlice'
-import { useQuery } from '@tanstack/react-query'
-import * as SecureStore from 'expo-secure-store'
 import { useGetQuestions } from '@/hooks/useGetQuestions'
 
 const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotalQuestions: any }) => {
@@ -24,7 +20,6 @@ const QuizPage = ({ changePage, setTotalQuestions }: { changePage: any, setTotal
     const [options, setOptions] = useState<string[]>([])
     const [selectedOptionIdx, setSelectedOptionIdx] = useState<number | null>()
     const [selectedOptionText, setSelectedOptionText] = useState<string>('')
-    // const [token, setToken] = useState<string | null>(null)
 
     // Shuffling the options
     function shuffleOptions(arr: any) {

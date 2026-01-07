@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import API_URL from "@/config/api"
 import { useDispatch } from "react-redux"
-import { setToken } from "@/Redux/tokenSlice"
 import { useRouter } from "expo-router"
 
 type QuizQuestion = {
